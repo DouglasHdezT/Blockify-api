@@ -60,9 +60,26 @@ const UserSchema = new Schema(
 );
 
 UserSchema.methods = {
-    makeSalt = function () { 
+    comparePassword: function (input) { 
+        return this.encryptPassword(input) === this.hashedPassword;
+    },
+    encryptPassword: function (password) {
+        if (!password) return "";
+
+        try {
+            const encyptedPassword = crypto
+                .createHash("sha256", this.salt)
+                .update(password)
+                .digest("hex");
+            
+            return encyptedPassword;
+        } catch {
+            return "";
+        }
+    },
+    makeSalt: function () {
         return Math.round(new Date().valueOf() * Math.random()) + "";
-    }
-}
+    },
+};
 
 module.exports = mongoose.model("User", UserSchema);
