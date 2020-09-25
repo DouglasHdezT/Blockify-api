@@ -5,8 +5,10 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const database = require("./config/database");
 
 var app = express();
+database.connect();
 
 app.use(logger('dev'));
 app.use(express.json());
