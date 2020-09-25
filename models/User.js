@@ -59,6 +59,15 @@ const UserSchema = new Schema(
     }
 );
 
+UserSchema
+    .virtual("password")
+    .set(function (password) { 
+        if (password === "") return;
+        
+        this.salt = this.makeSalt()
+        this.hashedPassword = this.encryptPassword(password);
+    })
+
 UserSchema.methods = {
     comparePassword: function (input) { 
         return this.encryptPassword(input) === this.hashedPassword;
