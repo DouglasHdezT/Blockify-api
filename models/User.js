@@ -23,7 +23,7 @@ const UserSchema = new Schema(
             required: true,
             unique: true,
             trim: true,
-            uppercase: true,
+            lowercase: true,
         },
         hashedPassword: {
             type: String,
