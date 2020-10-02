@@ -1,4 +1,4 @@
-const userService = require('../../../services/api/v1/user.service');
+const userService = require('../../../services/v1/user.service');
 
 const controller = {};
 
