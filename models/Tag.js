@@ -12,6 +12,7 @@ const TagSchema = new Schema(
             required: true,
             trim: true,
             lowercase: true,
+            unique: true,
         },
         description: {
             type: String,
