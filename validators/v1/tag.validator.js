@@ -2,7 +2,7 @@ const { check } = require('express-validator');
 
 const validators = {};
 
-validators.createTagValodator = [
+validators.saveTagValidator = [
     check("name").notEmpty().withMessage("Name is required!"),
     check("html").notEmpty().withMessage("HTML is required!"),
     check("description").notEmpty().withMessage("Description is required!"),
