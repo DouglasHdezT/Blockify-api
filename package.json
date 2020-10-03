@@ -36,6 +36,11 @@
         }
     ],
     "dependencies": {
+        "@internal/classes": "file:classes",
+        "@internal/controllers-v1": "file:controllers/api/v1",
+        "@internal/models": "file:models",
+        "@internal/routes-v1": "file:routes/api/v1",
+        "@internal/services-v1": "file:services/v1",
         "chalk": "^4.1.0",
         "cookie-parser": "~1.4.4",
         "debug": "~2.6.9",
