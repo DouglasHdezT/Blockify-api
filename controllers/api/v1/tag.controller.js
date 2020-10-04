@@ -74,6 +74,22 @@ controller.addValidAttr = async (req, res) => {
     }
 }
 
+controller.updateValidAttr = async (req, res) => { 
+    try {
+        const { tagID, name, description, validOptions } = req.body; 
+        
+        const { status: tagExists, content: tag } = await tagService.findOneByID(tagID);
+        if (!tagExists) return res.status(404).json({ error: "Tag not found" });
+
+        const { status: tagUpdated } = await tagService.updateValidAttr(tag, name, { description, validOptions });
+        if (!tagUpdated) return res.status(404).json({ error: "Attribute doesn't exists" });
+
+        return res.status(200).json({ message: "Attribute updated" });
+    } catch (error) {
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
 controller.removeValidAttr = async (req, res) => { 
     try {
         const { tagID, attrName } = req.body;

@@ -9,6 +9,7 @@ const {
     findByIdValidator,
     addAttrValidator,
     removeAttrValidator,
+    updateAttrValidator
 } = require("@internal/validators-v1/tag.validator");
 
 // Routes registration
@@ -18,6 +19,7 @@ router.get("/all", tagController.findAll);
 router.get("/one/:id", findByIdValidator, runValidation, tagController.findOneById);
 
 router.post("/attr", addAttrValidator, runValidation, tagController.addValidAttr);
+router.put("/attr", updateAttrValidator, runValidation, tagController.updateValidAttr);
 router.delete("/attr", removeAttrValidator, runValidation, tagController.removeValidAttr);
 
 module.exports = router;

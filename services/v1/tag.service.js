@@ -1,4 +1,6 @@
 const debug = require('debug')('app:tag-service');
+const { sanitizeObject } = require("@internal/utils/objects.tools");
+
 const ServiceResponse = require("@internal/classes/ServiceResponse");
 const Tag = require("@internal/models/Tag");
 
@@ -40,6 +42,25 @@ service.addValidAttr = async (tag , name, description, validOptions = ["Cualquie
         if (!updatedTag) return new ServiceResponse(false, { error: "Cannot update tag" });
         
         return new ServiceResponse(true, {message: "Attr added!"});
+    } catch (error) {
+        throw error;
+    }
+}
+
+service.updateValidAttr = async (tag, name, fieldsToUpdate) => { 
+    try {
+        const sanitizedFields = sanitizeObject(fieldsToUpdate);
+
+        const attrIndex = tag.validAttrs.findIndex(attr => attr.name === name);
+        if (attrIndex < 0) return new ServiceResponse(false, { error: "Attribute doesn't exists" });
+
+        Object.keys(sanitizedFields).forEach(key => {
+            tag.validAttrs[attrIndex][key] = sanitizedFields[key];
+        })
+
+        await tag.save();
+        
+        return new ServiceResponse(true, { message: "Tag updated" })
     } catch (error) {
         throw error;
     }
