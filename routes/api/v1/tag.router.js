@@ -7,6 +7,7 @@ const { runValidation } = require("@internal/validators-v1");
 const {
     saveTagValidator,
     findByIdValidator,
+    addAttrValidator
 } = require("@internal/validators-v1/tag.validator");
 
 // Routes registration
@@ -14,5 +15,7 @@ router.post("/", saveTagValidator, runValidation, tagController.saveTag);
 
 router.get("/all", tagController.findAll);
 router.get("/one/:id", findByIdValidator, runValidation, tagController.findOneById);
+
+router.patch("/addAttr", addAttrValidator, runValidation, tagController.addValidAttr);
 
 module.exports = router;

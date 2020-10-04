@@ -1,3 +1,4 @@
+const debug = require('debug')('app:tag-service');
 const ServiceResponse = require("@internal/classes/ServiceResponse");
 const Tag = require("@internal/models/Tag");
 
@@ -25,9 +26,10 @@ service.create = async (name, html, description, category) => {
 service.addValidAttr = async (tag , name, description, validOptions = ["Cualquier cadena de texto"]) => { 
     try {
         const lowerName = name.toLowerCase().trim();
-        const attrExists = tag.validAttrs.some(attr => attr === lowerName);
+        const attrExists = tag.validAttrs.some(attr => attr.name === lowerName);
+        
         if (attrExists) return new ServiceResponse(false, { error: "Attr already exists!" });
-
+        
         tag.validAttrs.push({
             name: lowerName,
             description,
@@ -38,6 +40,20 @@ service.addValidAttr = async (tag , name, description, validOptions = ["Cualquie
         if (!updatedTag) return new ServiceResponse(false, { error: "Cannot update tag" });
         
         return new ServiceResponse(true, {message: "Attr added!"});
+    } catch (error) {
+        throw error;
+    }
+}
+
+service.deleteValidAttr = async (tag, name) => { 
+    try {
+        const attrIndex = tag.validAttrs.findIndex(el => el.name === name);
+        if (attrIndex < 0) return new ServiceResponse(false, { error: "Attribute doesn't exist" });
+
+        tag.validAttrs = tag.validAttrs.filter(attr => attr.name !== name);
+        await tag.save();
+
+        return new ServiceResponse(true, { message: "Attribute removed" });
     } catch (error) {
         throw error;
     }

@@ -13,6 +13,21 @@ validators.findByIdValidator = [
     param("id")
         .notEmpty().withMessage("ID is required")
         .isMongoId().withMessage("ID must be mongo id")
-]
+];
+
+validators.addAttrValidator = [
+    check("tagID")
+        .notEmpty().withMessage("Tag id is required!")
+        .isMongoId().withMessage("Tag id must be mongo id"),
+    check("name")
+        .notEmpty().withMessage("Name is required!"),
+    check("description")
+        .notEmpty().withMessage("Description is required!"),
+    check("validOptions")
+        .optional()
+        .isArray().withMessage("Valid Options must be an array"),
+    check("validOptions.*")
+        .isString().withMessage("Valid Options must be a string array only")
+];
 
 module.exports = validators;
