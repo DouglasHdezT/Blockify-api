@@ -30,4 +30,12 @@ validators.addAttrValidator = [
         .isString().withMessage("Valid Options must be a string array only")
 ];
 
+validators.removeAttrValidator = [
+    check("tagID")
+        .notEmpty().withMessage("Tag id is required!")
+        .isMongoId().withMessage("Tag id must be mongo id"),
+    check('attrName')
+        .notEmpty().withMessage("Attribute name is required!")
+];
+
 module.exports = validators;

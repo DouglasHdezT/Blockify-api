@@ -74,4 +74,24 @@ controller.addValidAttr = async (req, res) => {
     }
 }
 
+controller.removeValidAttr = async (req, res) => { 
+    try {
+        const { tagID, attrName } = req.body;
+
+        const { status: tagExist, content: tag } = await tagService.findOneByID(tagID);
+        if (!tagExist) { 
+            return res.status(404).json({ error: "Tag not found" });
+        }
+
+        const { status: attrRemoved } = await tagService.deleteValidAttr(tag, attrName);
+        if (!attrRemoved) { 
+            return res.status(404).json({ error: "Attribute not found" });
+        }
+
+        return res.status(200).json({ message: "Attribute removed" });        
+    } catch (error) {
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+}
+
 module.exports = controller;
