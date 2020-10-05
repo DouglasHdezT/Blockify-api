@@ -1,5 +1,5 @@
 class ServiceResponse { 
-    constructor(status, content) { 
+    constructor(status=false, content) { 
         this.status = status; 
         this.content = content;
     }
