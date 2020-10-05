@@ -112,6 +112,23 @@ service.findOneByHTML = async (html) => {
     }
 }
 
+service.updateOneTag = async (tag, fieldsToUpdate) => { 
+    try {
+        const sanitizedFields = sanitizeObject(fieldsToUpdate);
+
+        Object.keys(sanitizedFields).forEach(key => {
+            tag[key] = sanitizedFields[key];
+        })
+
+        const tagUpdated = await tag.save();
+        if (!tagUpdated) return new ServiceResponse(false, { error: "Tag didn't update" });
+
+        return new ServiceResponse(true, { message: "Tag updated!" });
+    } catch (error) {
+        throw error;
+    }
+}
+
 service.deleteOneById = async (id) => { 
     try {
         const tagDeleted = await Tag.findByIdAndDelete(id);

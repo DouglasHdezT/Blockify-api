@@ -6,14 +6,18 @@ const tagController = require("@internal/controllers-v1/tag.controller");
 const { runValidation } = require("@internal/validators-v1");
 const {
     saveTagValidator,
+    updateTagValidator,
     findByIdValidator,
     addAttrValidator,
     removeAttrValidator,
-    updateAttrValidator
+    updateAttrValidator,
+    deleteTagValidator
 } = require("@internal/validators-v1/tag.validator");
 
 // Routes registration
 router.post("/", saveTagValidator, runValidation, tagController.saveTag);
+router.put("/", updateTagValidator, runValidation, tagController.updateOneById);
+router.delete("/", deleteTagValidator, runValidation, tagController.deleteOneByID);
 
 router.get("/all", tagController.findAll);
 router.get("/one/:id", findByIdValidator, runValidation, tagController.findOneById);

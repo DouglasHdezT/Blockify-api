@@ -51,6 +51,41 @@ controller.saveTag = async (req, res) => {
     }
 };
 
+controller.updateOneById = async (req, res) => { 
+    try {
+        const { tagID, name, html, description, category } = req.body;
+
+        const { status: tagExist, content: tag } = await tagService.findOneByID(tagID);
+        if (!tagExist) return res.status(404).json({ error: "Tag not found" });
+
+        const { status: tagRepeated } = await tagService.findOneByHTML(html);
+        if (tagRepeated) return res.status(409).json({ error: "Tag with that HTML already exists" });
+        
+        const { status: tagUpdated } = await tagService.updateOneTag(tag, { name, html, description, category });
+        if (!tagUpdated) return res.status(409).json({ error: "Tag cannot update" });
+
+        return res.status(200).json({ message: "Tag updated!" });
+    } catch (error) {
+        
+    }
+}
+
+controller.deleteOneByID = async (req, res) => { 
+    try {
+        const { tagID } = req.body;
+
+        const { status: tagExist } = await tagService.findOneByID(tagID); 
+        if (!tagExist) return res.status(404).json({ error: "Tag doesn't exists" });
+
+        const { status: tagDeleted } = await tagService.deleteOneById(tagID);
+        if (!tagDeleted) return res.status(409).json({ error: "Tag cannot be deleted" });
+
+        return res.status(200).json({ message: "Tag deleted!" });
+    } catch (error) {
+        throw error;
+    }
+}
+
 /** @type {import('express').RequestHandler} */
 controller.addValidAttr = async (req, res) => { 
     try {
