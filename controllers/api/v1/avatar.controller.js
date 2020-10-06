@@ -3,7 +3,7 @@ const path = require("path");
 
 const controller = {};
 
-const host = process.env.HOST || "localhost:3000";
+const host = process.env.HOSTURL || "localhost:3000";
 
 controller.findAll = async (req, res) => {
     try {
