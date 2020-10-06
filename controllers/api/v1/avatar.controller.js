@@ -10,15 +10,23 @@ controller.findAll = async (req, res) => {
         fs.readdir(path.join(process.cwd(), "public/avatars"), (err, files) => { 
             if(err) return res.status(500).json({ error: "Internal Server Error" });
             
-            const avatars = files.map(file => `${host}/avatars/${file}`);
+            const avatars = files.map(file => ({ avatar: `${host}/avatars/${file}` }));
             
             return res.status(200).json(avatars);
         } );
-
-
     } catch (error) {
         return res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
+controller.random = async (req, res) => { 
+    fs.readdir(path.join(process.cwd(), "public/avatars"), (err, files) => { 
+        if(err) return res.status(500).json({ error: "Internal Server Error" });
+        
+        const index = Math.floor(Math.random() * (files.length));
+        
+        return res.status(200).json({avatar: `${host}/avatars/${files[index]}`});
+    } );
+}
 
 module.exports = controller;
