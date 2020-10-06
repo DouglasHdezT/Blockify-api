@@ -1,4 +1,4 @@
-const fs = require("fs/promises");
+const fs = require("fs");
 const path = require("path");
 
 const controller = {};
@@ -9,7 +9,7 @@ controller.findAll = async (req, res) => {
     try {
         const files = await fs.readdir(path.join(process.cwd(), "public/avatars"));
 
-        const avatars = files.map(file => `${host}/avatars/${file}`);
+        const avatars = /* files.map(file => `${host}/avatars/${file}`) */[];
 
         return res.status(200).json(avatars);
     } catch (error) {
