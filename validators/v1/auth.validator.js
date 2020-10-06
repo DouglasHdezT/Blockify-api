@@ -25,4 +25,11 @@ validator.registerValidator = [
         .isLength({ min: 8, max: 32 }).withMessage("Pasword length must be between 8 and 32 characters")
 ]
 
+validator.loginValidator = [
+    check("password")
+        .notEmpty().withMessage("Password is required"),
+    check("identifier")
+        .notEmpty().withMessage("Identifier is required")
+];
+
 module.exports = validator;
