@@ -25,6 +25,10 @@ const UserSchema = new Schema(
             trim: true,
             lowercase: true,
         },
+        avatar: {
+            type: String,
+            required: true
+        },
         hashedPassword: {
             type: String,
             required: true,
