@@ -10,7 +10,7 @@ controller.findAll = async (req, res) => {
         fs.readdir(path.join(process.cwd(), "public/avatars"), (err, files) => { 
             if(err) return res.status(500).json({ error: "Internal Server Error" });
             
-            const avatars = files.map(file => ({ avatar: `${host}/avatars/${file}` }));
+            const avatars = files.map(file => ({ avatar: encodeURI(`${host}/avatars/${file}`) }));
             
             return res.status(200).json(avatars);
         } );
@@ -25,7 +25,7 @@ controller.random = async (req, res) => {
         
         const index = Math.floor(Math.random() * (files.length));
         
-        return res.status(200).json({avatar: `${host}/avatars/${files[index]}`});
+        return res.status(200).json({avatar: encodeURI(`${host}/avatars/${files[index]}`)});
     } );
 }
 
