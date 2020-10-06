@@ -18,8 +18,7 @@ validator.registerValidator = [
         .isEmail().withMessage("Email incorrect format")
         .normalizeEmail(),
     check("avatar")
-        .notEmpty().withMessage("Avatar is required")
-        .matches(new RegExp(urlRegex)).withMessage("Avatar must be an URL"),
+        .notEmpty().withMessage("Avatar is required"),
     check("password")
         .notEmpty().withMessage("Password is required")
         .matches(new RegExp(passwordRegex)).withMessage("Password must contain at least 1 uppercase, 1 lowercase and 1 number")
