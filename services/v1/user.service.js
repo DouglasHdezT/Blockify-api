@@ -1,5 +1,6 @@
 const User = require("@internal/models/User"); 
 const ServiceResponse = require("@internal/classes/ServiceResponse");
+const { verifyToken } = require('@internal/utils/jwt.tools');
 
 const service = {};
 
@@ -36,5 +37,21 @@ service.register = async ({ username, email, password, firstname, lastname, avat
         throw error;
     }
 }
+
+service.insertValidToken = async (user, token) => { 
+    try {
+        //Cleaning uptime tokens
+        user.validTokens = user.validTokens.filter(token => verifyToken(token));
+
+        user.validTokens.push(token);
+
+        const userSaved = await user.save();
+        if (!userSaved) return new ServiceResponse(false, { error: "Token not inserted" });
+
+        return new ServiceResponse(true, { message: "Token inserted" });
+    } catch (error) {
+        throw error;
+    }
+};
 
 module.exports = service;

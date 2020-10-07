@@ -24,15 +24,22 @@ controller.login = async (req, res) => {
     try {
         const { identifier, password } = req.body;
 
+        //User verification
         const { status: userExists, content: user } =
             await userService.findOneByUsernameOrEmail(identifier, identifier);
         
         if (!userExists) return res.status(404).json({ error: "User not found" });
         
+        //Password verification
         const isPassCorrect = user.comparePassword(password);
         if (!isPassCorrect) return res.status(401).json({ error: "Password incorrect" });
 
+        //Token creation
         const token = createToken(user._id);
+        
+        //Token registration
+        const { status: tokenInserted } = await userService.insertValidToken(user, token);
+        if (!tokenInserted) return res.status(409).json({ error: "Cannot login user" });
 
         return res.status(200).json({token: token});
     } catch (error) {

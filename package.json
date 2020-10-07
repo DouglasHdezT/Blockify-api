@@ -38,6 +38,7 @@
     "dependencies": {
         "@internal/classes": "file:classes",
         "@internal/controllers-v1": "file:controllers/api/v1",
+        "@internal/middlewares-v1": "file:middlewares/v1",
         "@internal/models": "file:models",
         "@internal/routes-v1": "file:routes/api/v1",
         "@internal/services-v1": "file:services/v1",
