@@ -54,4 +54,36 @@ service.insertValidToken = async (user, token) => {
     }
 };
 
+/**
+ * Middleware verification methods
+ */
+
+service.findOneById = async (id) => { 
+    try {
+        const user = await User.findById(id)
+            .select("-hashedPassword -validTokens -salt");
+        
+        if (!user) return new ServiceResponse(false, { error: "User not found" });
+
+        return new ServiceResponse(true, user);
+    } catch (error) {
+        throw error;
+    }
+}
+
+service.verifyTokenByID = async (id, token) => { 
+    try {
+        const user = await User.findById(id);
+        
+        if (!user) return new ServiceResponse(false, { error: "Cannot verify token" });
+        
+        const index = user.validTokens.findIndex(validToken => validToken === token);
+        if (index < 0) return new ServiceResponse(false, { error: "Token not registered" });
+
+        return new ServiceResponse(true, { message: "Valid token" });
+    } catch (error) {
+        
+    }
+}
+
 module.exports = service;

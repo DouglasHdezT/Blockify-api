@@ -1,5 +1,7 @@
 const { verifyToken } = require("@internal/utils/jwt.tools");
-const userService = require("@internal/services-v1");
+const { verifyMongoID } = require("@internal/utils/mongo.tools");
+
+const userService = require("@internal/services-v1/user.service");
 
 const middleware = {};
 
@@ -30,8 +32,27 @@ middleware.authRequired = async (req, res, next) => {
             return res.status(400).json({ error: "Token is needed" });
         }
 
+        //token strong validation
+        const tokenObject = verifyToken(token);
+        if (!tokenObject) return res.status(403).json({ error: "Invalid token" });
 
+        const { _id: userID } = tokenObject;
 
+        //Id validation
+        if (!verifyMongoID(userID)) return res.status(403).json({ error: "Invalid token" });
+
+        //User existence
+        const { status: userExist, content: user } = await userService.findOneById(userID);
+        if (!userExist) return res.status(403).json({ error: "Any user match" });
+
+        //TOken in ValidTokens
+        const { status: isValidToken } = await userService.verifyTokenByID(userID, token);
+        if (!isValidToken) return res.status(403).json({ error: "Token not registered" });
+        
+        //User doc asignation
+        req.user = user;
+        
+        next();
     } catch (error) {
         return res.status(500).json({ error: "Internal Server Error" });
     }
