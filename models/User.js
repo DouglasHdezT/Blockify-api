@@ -1,6 +1,8 @@
 const mongoose = require("mongoose");
 const crypto = require("crypto");
 
+const { ROLES } = require("@internal/constants");
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema(
@@ -57,6 +59,10 @@ const UserSchema = new Schema(
             },
         ],
         validTokens: [String],
+        roles: {
+            type: [String],
+            default: [ROLES.DEFAULT]
+        }
     },
     {
         timestamps: true,

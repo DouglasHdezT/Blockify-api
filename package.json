@@ -37,6 +37,7 @@
     ],
     "dependencies": {
         "@internal/classes": "file:classes",
+        "@internal/constants": "./constants",
         "@internal/controllers-v1": "file:controllers/api/v1",
         "@internal/middlewares-v1": "file:middlewares/v1",
         "@internal/models": "file:models",
