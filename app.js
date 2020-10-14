@@ -6,11 +6,15 @@ const cors = require('cors');
 
 var indexRouter = require('./routes/index.router');
 const database = require("./config/database");
+const { limiter } = require("./config/rateLimiter");
 
 var app = express();
 database.connect();
 
 app.use(cors());
+app.set('trust proxy', 1);
+
+app.use(limiter)
 
 app.use(logger('dev'));
 app.use(express.json());
