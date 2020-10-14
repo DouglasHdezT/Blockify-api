@@ -58,4 +58,19 @@ middleware.authRequired = async (req, res, next) => {
     }
 }
 
+/**
+ * 
+ * @returns {import("express").RequestHandler} 
+ */
+middleware.roleValidatorHelper = (roleToVerify) => { 
+    return (req, res, next) => { 
+        const { roles } = req.user;
+        
+        const indexOfRole = roles.findIndex(role => role === roleToVerify);
+        if (indexOfRole < 0) return res.status(401).json({ error: "Unauthorized to access here" });
+
+        next();
+    }
+}
+
 module.exports = middleware;

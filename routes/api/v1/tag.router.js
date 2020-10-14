@@ -3,6 +3,9 @@ const router = express.Router();
 
 const tagController = require("@internal/controllers-v1/tag.controller");
 
+const { roleValidatorHelper } = require("@internal/middlewares-v1/auth.middleware");
+const { ROLES } = require("@internal/constants");
+
 const { runValidation } = require("@internal/validators-v1");
 const {
     saveTagValidator,
@@ -15,12 +18,15 @@ const {
 } = require("@internal/validators-v1/tag.validator");
 
 // Routes registration
+router.get("/all", tagController.findAll);
+router.get("/one/:id", findByIdValidator, runValidation, tagController.findOneById);
+
+//Only for admins
+router.use(roleValidatorHelper(ROLES.ADMIN));
+
 router.post("/", saveTagValidator, runValidation, tagController.saveTag);
 router.put("/", updateTagValidator, runValidation, tagController.updateOneById);
 router.delete("/", deleteTagValidator, runValidation, tagController.deleteOneByID);
-
-router.get("/all", tagController.findAll);
-router.get("/one/:id", findByIdValidator, runValidation, tagController.findOneById);
 
 router.post("/attr", addAttrValidator, runValidation, tagController.addValidAttr);
 router.put("/attr", updateAttrValidator, runValidation, tagController.updateValidAttr);
