@@ -1,0 +1,5 @@
+{
+    "name": "@internal/constants",
+    "version": "0.0.0",
+    "main": "index.constants.js"
+}
