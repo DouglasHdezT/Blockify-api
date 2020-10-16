@@ -15,6 +15,7 @@ const tagRouter = require('./tag.router');
 //Public routes
 router.use("/auth", authRouter);
 router.use("/avatar", avatarRouter);
+//router.use("/user", userRouter);
 
 //User verification middleware
 router.use(authRequired);
