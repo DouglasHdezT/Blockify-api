@@ -1,6 +1,7 @@
 const User = require("@internal/models/User");
 const ServiceResponse = require("@internal/classes/ServiceResponse");
 const { verifyToken } = require('@internal/utils/jwt.tools');
+const { sanitizeObject } = require("@internal/utils/objects.tools");
 
 const service = {};
 
@@ -40,7 +41,10 @@ service.register = async ({ username, email, password, firstname, lastname, avat
 
 service.update = async (id, fieldsToUpdate) => { // los nombres, el username y el correo
     try {
-        const userUpdated = await User.findByIdAndUpdate(id, { ...fieldsToUpdate });
+        //Clean up undefined fields 
+        const sanitizedObject = sanitizeObject(fieldsToUpdate);
+
+        const userUpdated = await User.findByIdAndUpdate(id, { ...sanitizedObject });
         if (!userUpdated) return new ServiceResponse(false, { error: "User didn't update" });
 
         return new ServiceResponse(true, userUpdated);
