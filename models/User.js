@@ -29,7 +29,7 @@ const UserSchema = new Schema(
         },
         avatar: {
             type: String,
-            required: true
+            default: "",
         },
         hashedPassword: {
             type: String,

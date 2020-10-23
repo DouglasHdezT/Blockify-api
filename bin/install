@@ -1,20 +1,109 @@
 #!/usr/bin/env node
 
 require("dotenv").config();
+
 const { connect, disconnect } = require("../config/database");
+const userService = require("@internal/services-v1/user.service");
+
+const figlet = require("figlet");
+const chalk = require("chalk");
+const boxen = require("boxen");
+const prompts = require("prompts");
+const ora = require("ora");
+
+const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,32})/;
+const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+
+const { ROLES } = require("@internal/constants");
 
 const runInstallation = async () => { 
     try {
-        console.log("Install Script");
-
         await connect();
 
+        const welcome = figlet.textSync("Blockify", {
+            font: "Ghost",
+            horizontalLayout: 'default',
+            verticalLayout: 'default',
+            width: 90,
+            whitespaceBreak: true
+        });
 
+        const customWelcome = boxen(chalk.bold.white(welcome), {
+            padding: 1,
+            margin: 1,
+            borderStyle: "round"
+        })
+
+        //Welcome text
+        console.log(customWelcome);
+
+        let flagUserInfo = false;
+        let userInfo = {};
+
+        //Superuser configuration
+        do {
+            console.log(chalk.bold.whiteBright("Superuser configuration"));
+
+            const user = await prompts([
+                {
+                    type: "text",
+                    name: "firstname",
+                    message: "Your firstname?"
+                },
+                {
+                    type: "text",
+                    name: "lastname",
+                    message: "Your lastname?"
+                },
+                {
+                    type: "text",
+                    name: "username",
+                    message: "Give me a username:",
+                    validate: (value) => value.length < 4 ? `Min length: 4` : true
+                },
+                {
+                    type: "password",
+                    name: "password",
+                    message: "A super secure password: ",
+                    validate: (value) => !passwordRegex.test(value) ? "At least 1 Upper 1 Lower 1 Number, and length between 8 and 32 chars" : true,
+                },
+                {
+                    type: "text",
+                    name: "email",
+                    message: "An email:",
+                    validate: value => !emailRegex.test(value) ? "Incorrect email format" : true
+                },
+            ]);
+
+            userInfo = { ...user };
+            
+            const confirm = await prompts({
+                type: "toggle",
+                name: "value",
+                message: "Are you sure?",
+                active: "yes",
+                inactive: "no"
+            });
+
+            flagUserInfo = confirm.value;
+        } while (!flagUserInfo);
+
+        //TODO: Implement user creation and ORA (Loading) spinner
+
+        const { status: userExists } =
+            await userService.findOneByUsernameOrEmail(userInfo.username, userInfo.email);
         
+        if (userExists) {
+            console.log(chalk.bold.hex("#F44336")("Error: User already exists!"));
+            return;
+        }
 
+        await userService.register(userInfo, true);
+    } catch (error) {
+        console.log(chalk.bold.hex("#F44336")("Error in istalation"));
+        
+    }finally { 
         await disconnect();
-    } catch { 
-        console.log("Error in istalation;")
     }
 }
 

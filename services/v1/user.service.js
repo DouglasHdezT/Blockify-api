@@ -3,6 +3,8 @@ const ServiceResponse = require("@internal/classes/ServiceResponse");
 const { verifyToken } = require('@internal/utils/jwt.tools');
 const { sanitizeObject } = require("@internal/utils/objects.tools");
 
+const { ROLES } = require("@internal/constants");
+
 const service = {};
 
 service.findOneByUsernameOrEmail = async (username, email) => {
@@ -19,7 +21,7 @@ service.findOneByUsernameOrEmail = async (username, email) => {
     }
 }
 
-service.register = async ({ username, email, password, firstname, lastname, avatar }) => {
+service.register = async ({ username, email, password, firstname, lastname, avatar }, isAdmin=false) => {
     try {
         const user = new User({
             username,
@@ -29,6 +31,10 @@ service.register = async ({ username, email, password, firstname, lastname, avat
             lastname,
             avatar
         });
+
+        if (isAdmin) { 
+            user.roles = [ROLES.DEFAULT, ROLES.ADMIN];
+        }
 
         const userSaved = await user.save();
         if (!userSaved) return new ServiceResponse(false, { error: "User not created" });
