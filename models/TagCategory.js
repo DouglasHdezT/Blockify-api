@@ -6,7 +6,9 @@ const TagCategorySchema = new Schema({
     abbr: {
         type: String,
         required: true,
-        unique: true
+        trim: true,
+        unique: true,
+        lowercase: true
     },
     name: {
         type: String,
