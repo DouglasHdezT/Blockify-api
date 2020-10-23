@@ -6,9 +6,9 @@ const urlRegex = "^(https?|chrome):\/\/[^\s$.?#].[^\s]*$";
 const validator = {};
 
 validator.registerValidator = [
-    check("firstname")
+    check("firstname").optional()
         .notEmpty().withMessage("Firstname is required"),
-    check("lastname")
+    check("lastname").optional()
         .notEmpty().withMessage("Lastname is required"),
     check("username")
         .notEmpty().withMessage("Username is required")

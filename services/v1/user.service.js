@@ -25,8 +25,8 @@ service.register = async ({ username, email, password, firstname, lastname, avat
             username,
             email,
             password,
-            firstname,
-            lastname,
+            firstname="",
+            lastname="",
             avatar
         });
 
