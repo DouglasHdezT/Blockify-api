@@ -3,5 +3,65 @@
         "abbr": "metadata",
         "name": "Metadatos del documento",
         "description": "Los metadatos contienen información sobre la página. Esto incluye información sobre estilos, scripts y datos que ayudan al software (search engines, browsers, etc.) a usar y generar la página. Los metadatos de estilos y scripts pueden estar definidos en la página o estar enlazados a otro fichero que contiene la información."
+    },
+    {
+        "name": "Seccionamiento básico",
+        "abbr": "basic-sections",
+        "description": ""
+    },
+    {
+        "name": "Seccionamiento del contenido",
+        "abbr": "content-sections",
+        "description": "Los elementos de seccionamiento del contenido te permiten organizar los contenidos del documento en partes lógicas. Usa los elementos de seccionado para crear una descripción amplia de los contenidos de tu página, incluyendo el encabezado y pie de página y elementos para identificar secciones."
+    },
+    {
+        "name": "Contenido del texto",
+        "abbr": "text-content",
+        "description": "Utiliza los elementos HTML de contenido del texto para organizar bloques o secciones de contenido colocados entre los tags de apertura<body> y cierre. Es importante para la accessibility y el SEO, que estos elementos se identifiquen con el objetivo o la estructura de ese contenido."
+    },
+    {
+        "name": "Semántica del texto en línea",
+        "abbr": "semantic-inline-text",
+        "description": "Utilice la semántica del texto en línea HTML para definir el significado, estructura, o el estilo de una palabra, una línea o cualquier pieza arbitraria de texto."
+    },
+    {
+        "name": "Imagen y multimedia",
+        "abbr": "multimedia",
+        "description": "HTML soporta varios recursos multimedia como imágenes, audio, y video."
+    },
+    {
+        "name": "Contenido incrustado",
+        "abbr": "embed-content",
+        "description": "Además de los contenidos multimedia habituales, HTML puede incluir otra variedad de contenidos, aunque no siempre es fácil de interactuar con ellos."
+    },
+    {
+        "name": "Scripting",
+        "abbr": "scripting",
+        "description": "Con el fin de crear contenido dinámico y aplicaciones Web, HTML soporta el uso de lenguajes de scripting, el más prominente es JavaScript. Ciertos elementos soportan esta capacidad."
+    },
+    {
+        "name": "Ediciones demarcadas",
+        "abbr": "alter-text",
+        "description": "Estos elementos permiten proporcionar indicios de que determinadas partes del texto han sido alteradas."
+    },
+    {
+        "name": "Tablas",
+        "abbr": "tables",
+        "description": "Estos elementos son usados para crear y manejar datos tabulados."
+    },
+    {
+        "name": "Formularios",
+        "abbr": "forms",
+        "description": "HTML provee un número de elementos que pueden usarse conjuntamente para crear formularios los cuales el usuario puede completar y enviar al sitio Web o a una aplicación. Hay una gran cantidad de información acerca de ésto disponible en la HTML forms guide."
+    },
+    {
+        "name": "Elementos interactivos",
+        "abbr": "interactive",
+        "description": "HTML ofrece una selección de elementos que pueden ayudar a crear objetos de interfaz de usuario interactivos."
+    },
+    {
+        "name": "Componentes web",
+        "abbr": "components",
+        "description": "Los Componentes Web son una tecnología relacionada con HTML que hacen que sea posible, en esencia, crear y personalizar elementos como si fueran HTML normal. Además, pueden crear versiones personalizadas de los elementos HTML estándar."
     }
 ]
