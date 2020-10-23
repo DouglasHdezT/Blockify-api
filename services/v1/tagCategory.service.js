@@ -1,12 +1,15 @@
 const service = {};
+
 const TagCategory = require("@internal/models/TagCategory");
 const ServiceResponse = require("@internal/classes/ServiceResponse");
+const { sanitizeObject } = require("@internal/utils/objects.tools");
 
-service.create = async (name, description) => {
+service.create = async (name, description, abbr) => {
     try {
         const tagCategory = new TagCategory({
             name,
             description,
+            abbr
         });
 
         const savedTagCategory = await tagCategory.save();
@@ -44,6 +47,18 @@ service.findByName = async (name) => {
     }
 }
 
+service.findByAbbr = async (abbr) => {
+    try {
+        const tagCategory = await TagCategory.findOne({ abbr: abbr })
+        
+        if (!tagCategory) return new ServiceResponse(false, { error: "Tag category not found" });
+
+        return new ServiceResponse(true, tagCategory);
+    } catch (error) {
+        throw error;
+    }
+}
+
 service.findAll = async () => {
     try {
         const tagCategories = await TagCategory.find({});
@@ -58,8 +73,9 @@ service.findAll = async () => {
 
 service.updateOne = async (id, fieldsToUpdate) => {
     try {
-        //console.log(id);
-        const tagCategoryUpdated = await TagCategory.findByIdAndUpdate(id, { ...fieldsToUpdate });
+        const fieldsSanitized = sanitizeObject(fieldsSanitized);
+        
+        const tagCategoryUpdated = await TagCategory.findByIdAndUpdate(id, { ...fieldsSanitized });
         console.log(tagCategoryUpdated);
         if (!tagCategoryUpdated) return new ServiceResponse(false, { error: "Tag didn't update" });
 

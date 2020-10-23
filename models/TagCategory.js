@@ -3,11 +3,18 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const TagCategorySchema = new Schema({
+    abbr: {
+        type: String,
+        required: true,
+        unique: true
+    },
     name: {
-        type: String
+        type: String,
+        required: true,
     },
     description: {
-        type: String
+        type: String,
+        default: ""
     }
 },
     {

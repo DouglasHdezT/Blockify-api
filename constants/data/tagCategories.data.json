@@ -1,0 +1,7 @@
+[
+    {
+        "abbr": "metadata",
+        "name": "Metadatos del documento",
+        "description": "Los metadatos contienen información sobre la página. Esto incluye información sobre estilos, scripts y datos que ayudan al software (search engines, browsers, etc.) a usar y generar la página. Los metadatos de estilos y scripts pueden estar definidos en la página o estar enlazados a otro fichero que contiene la información."
+    }
+]

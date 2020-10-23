@@ -4,13 +4,13 @@ const controller = {};
 
 controller.saveTagCategory = async (req, res) => {
     try {
-        const { name, description } = req.body
+        const { name, description, abbr } = req.body
 
-        const { status: tagExist } = await tagCategoryService.findByName(name);
+        const { status: tagExist } = await tagCategoryService.findByAbbr(abbr);
 
         if (tagExist) return res.status(409).json({ error: "Tag Category already exist!" });
 
-        const { status: tagCreated } = await tagCategoryService.create(name, description);
+        const { status: tagCreated } = await tagCategoryService.create(name, description, abbr);
 
         if (!tagCreated) return res.status(409).json({ error: "Tag Category not created" });
 
@@ -68,8 +68,8 @@ controller.findAll = async (req, res) => {
 controller.update = async (req, res) => {
     try {
 
-        const { id, name } = req.body;
-        const { status: existByName } = await tagCategoryService.findByName(name);
+        const { id, abbr } = req.body;
+        const { status: existByName } = await tagCategoryService.findByAbbr(abbr);
 
         if (existByName) {
             return res.status(409).json({ error: "Already exists!" });

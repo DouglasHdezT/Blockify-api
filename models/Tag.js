@@ -18,15 +18,18 @@ const TagSchema = new Schema(
             type: String,
             required: true,
         },
-        category: String,
+        category: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "TagCategory"
+        },
         validAttrs: [{
             name: {
                 type: String,
-                require: true
+                required: true
             },
             description: {
                 type: String,
-                require: true
+                required: true
             },
             validOptions: [ String ]
             

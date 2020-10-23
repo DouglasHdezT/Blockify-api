@@ -14,14 +14,14 @@ const ora = require("ora");
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,32})/;
 const emailRegex = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 
-const { ROLES } = require("@internal/constants");
-
 const runInstallation = async () => { 
     try {
+        const databaseSpinner = ora("Loading database\n").start();
         await connect();
+        databaseSpinner.succeed("Database loaded!\n");
 
         const welcome = figlet.textSync("Blockify", {
-            font: "Ghost",
+            font: "Soft",
             horizontalLayout: 'default',
             verticalLayout: 'default',
             width: 90,
@@ -36,75 +36,116 @@ const runInstallation = async () => {
 
         //Welcome text
         console.log(customWelcome);
+        let option = 0;
 
-        let flagUserInfo = false;
-        let userInfo = {};
-
-        //Superuser configuration
         do {
-            console.log(chalk.bold.whiteBright("Superuser configuration"));
+            console.log(`\n\n${chalk.bold.hex("#E91E63")("Intalation CLI")}\n\n`)
 
-            const user = await prompts([
-                {
-                    type: "text",
-                    name: "firstname",
-                    message: "Your firstname?"
-                },
-                {
-                    type: "text",
-                    name: "lastname",
-                    message: "Your lastname?"
-                },
-                {
-                    type: "text",
-                    name: "username",
-                    message: "Give me a username:",
-                    validate: (value) => value.length < 4 ? `Min length: 4` : true
-                },
-                {
-                    type: "password",
-                    name: "password",
-                    message: "A super secure password: ",
-                    validate: (value) => !passwordRegex.test(value) ? "At least 1 Upper 1 Lower 1 Number, and length between 8 and 32 chars" : true,
-                },
-                {
-                    type: "text",
-                    name: "email",
-                    message: "An email:",
-                    validate: value => !emailRegex.test(value) ? "Incorrect email format" : true
-                },
-            ]);
-
-            userInfo = { ...user };
-            
-            const confirm = await prompts({
-                type: "toggle",
+            const { value } = await prompts({
+                type: "select",
                 name: "value",
-                message: "Are you sure?",
-                active: "yes",
-                inactive: "no"
+                message: "What do you want to do?",
+                choices: [
+                    { title: "Create a superuser", description: "A user with all the privileges", value: 1 },
+                    { title: "Load catalogs", description: "Populate the DB with default data", value: 2 },
+                    { title: "Exit", description: "Goodbye!", value: 0 },
+                ]
             });
 
-            flagUserInfo = confirm.value;
-        } while (!flagUserInfo);
+            option = value;
 
-        //TODO: Implement user creation and ORA (Loading) spinner
+            switch (option) { 
+                case 1:
+                    await registerSuperuser();
+                    break;
+                case 2:
+                    break;
+            }
 
-        const { status: userExists } =
-            await userService.findOneByUsernameOrEmail(userInfo.username, userInfo.email);
+        } while (option != 0);
+
         
-        if (userExists) {
-            console.log(chalk.bold.hex("#F44336")("Error: User already exists!"));
-            return;
-        }
-
-        await userService.register(userInfo, true);
     } catch (error) {
+        console.log(error);
         console.log(chalk.bold.hex("#F44336")("Error in istalation"));
-        
-    }finally { 
+    } finally { 
         await disconnect();
+        console.log(chalk.bold.hex("#00BCD4")("See ya!"))
     }
+}
+
+const registerSuperuser = async () => { 
+    let flagUserInfo = false;
+    let aborted = false;
+    let userInfo = {};
+
+    //Superuser configuration
+    do {
+        console.log(`\n\n${chalk.bold.whiteBright("Superuser configuration")}\n\n`);
+
+        const user = await prompts([
+            {
+                type: "text",
+                name: "firstname",
+                message: "Your firstname?"
+            },
+            {
+                type: "text",
+                name: "lastname",
+                message: "Your lastname?"
+            },
+            {
+                type: "text",
+                name: "username",
+                message: "Give me a username:",
+                validate: (value) => value.length < 4 ? `Min length: 4` : true
+            },
+            {
+                type: "password",
+                name: "password",
+                message: "A super secure password: ",
+                validate: (value) => !passwordRegex.test(value) ? "At least 1 Upper 1 Lower 1 Number, and length between 8 and 32 chars" : true,
+            },
+            {
+                type: "text",
+                name: "email",
+                message: "An email:",
+                validate: value => !emailRegex.test(value) ? "Incorrect email format" : true
+            },
+        ], {
+                onCancel:  () => {aborted = true}
+        });
+
+        if (aborted) return;
+
+        userInfo = { ...user };
+        
+        const confirm = await prompts({
+            type: "toggle",
+            name: "value",
+            message: "Are you sure?",
+            active: "yes",
+            inactive: "no"
+        });
+
+        flagUserInfo = confirm.value;
+    } while (!flagUserInfo);
+
+    const userSpinner = ora({
+        text: "Registering user",
+        color: "cyan"
+    }).start();
+
+    const { status: userExists } =
+        await userService.findOneByUsernameOrEmail(userInfo.username, userInfo.email);
+    
+    if (userExists) {
+        userSpinner.fail(chalk.bold.hex("#F44336")("User already exists"));
+        return;
+    }
+
+    await userService.register(userInfo, true);
+    userSpinner.succeed(chalk.bold.hex("#4CAF50")("User registration complete"));
 }
 
 runInstallation();
