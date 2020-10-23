@@ -14,3 +14,5 @@ const runInstallation = async () => {
         console.log("Error in istalation;")
     }
 }
+
+runInstallation();
