@@ -17,6 +17,8 @@ const connectionSuccesful =
 	`Connection to ${chalk.bold.hex("#5C6BC0")(dbname)} database ${chalk.bold.hex("#66BB6A")("successful")}`;
 const connectionFailure =
 	`${chalk.bold.hex("#EF5350")("Error: ")}Cannot connext to ${chalk.bold.hex("#5C6BC0")(dbname)} database!`;
+const disconnectMsg = 
+    `Connection end: ${chalk.bold.hex("#5C6BC0")(dbname)} database`;
 
 /**
  * Connection to Mongo database method
@@ -36,6 +38,19 @@ const connect = async () => {
     }
 };
 
+/**
+ * Disconnect method 
+ */
+const disconnect = async () => { 
+    try {
+        await Mongoose.disconnect();
+        console.log(disconnectMsg);
+    } catch (error) {
+        process.exit(1);
+    }
+}
+
 module.exports = {
-	connect,
+    connect,
+    disconnect
 }

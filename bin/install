@@ -1,15 +1,18 @@
 #!/usr/bin/env node
 
 require("dotenv").config();
-const { connect } = require("../config/database");
+const { connect, disconnect } = require("../config/database");
 
 const runInstallation = async () => { 
     try {
         console.log("Install Script");
 
+        await connect();
+
+
         
 
-        await connect();
+        await disconnect();
     } catch { 
         console.log("Error in istalation;")
     }

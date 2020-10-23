@@ -19,7 +19,7 @@ service.findOneByUsernameOrEmail = async (username, email) => {
     }
 }
 
-service.register = async ({ username, email, password, firstname="", lastname="", avatar }) => {
+service.register = async ({ username, email, password, firstname, lastname, avatar }) => {
     try {
         const user = new User({
             username,

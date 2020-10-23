@@ -8,7 +8,8 @@
     "license": "MIT",
     "scripts": {
         "start": "node ./bin/www",
-        "dev": "nodemon ./bin/www"
+        "dev": "nodemon ./bin/www",
+        "app:install": "node ./bin/install"
     },
     "author": {
         "name": "Spicy Code Lines"
@@ -45,6 +46,7 @@
         "@internal/services-v1": "file:services/v1",
         "@internal/utils": "file:utils",
         "@internal/validators-v1": "file:validators/v1",
+        "boxen": "^4.2.0",
         "chalk": "^4.1.0",
         "cookie-parser": "~1.4.4",
         "cors": "^2.8.5",
