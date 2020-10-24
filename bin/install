@@ -3,9 +3,14 @@
 require("dotenv").config();
 
 const { connect, disconnect } = require("../config/database");
+
 const userService = require("@internal/services-v1/user.service");
+const tagCategoryService = require("@internal/services-v1/tagCategory.service");
+const tagService = require("@internal/services-v1/tag.service");
 
 const tagCategoriesData = require("@internal/constants/data/tagCategories.data.json");
+const tagsData = require("@internal/constants/data/tags.data.json");
+const { TC } = require("@internal/constants/");
 
 const figlet = require("figlet");
 const chalk = require("chalk");
@@ -153,6 +158,53 @@ const registerSuperuser = async () => {
 
 const loadCatalogs = async () => { 
     console.log(`\n\n${chalk.bold.whiteBright("Load Catalogs Process")}\n\n`);
+
+    //Tag categories dump data
+    const tagCategoriesSpinner = ora("Loading Tag Categories").start();
+
+    const { status: defaultTCExists } = await tagCategoryService.findByAbbr(TC.DEFAULTABBR);
+    if (!defaultTCExists)
+        await tagCategoryService.create(TC.DEFAULTNAME, TC.DEFAULTDESC, TC.DEFAULTABBR);
+
+    const tagCatsPromises = tagCategoriesData.map(async ({ abbr, name, description}) => { 
+        const { status: tagCategoryExists } = await tagCategoryService.findByAbbr(abbr);
+
+        if (!tagCategoryExists) {
+            await tagCategoryService.create(name, description, abbr);
+            return true;
+        } else { 
+            return false
+        }
+    });
+
+    const TCAcceptance = await Promise.all(tagCatsPromises);
+    tagCategoriesSpinner.succeed("Tag categories loaded");
+
+    //Tags dump data
+    const tagsSpinner = ora("Loading Tags").start();
+
+    const { content: defaultCategory } = await tagCategoryService.findByAbbr(TC.DEFAULTABBR);
+
+    const tagsPromises = tagsData.map(async ({ name, html, category, description, validAttrs }) => { 
+        const { status: tagExists } = await tagService.findOneByHTML(html);
+        if (tagExists) return;
+
+        const { status: categoryExists, content: categoryFound } =
+            await tagCategoryService.findByAbbr(category);
+        
+        let catID = "";
+        if (categoryExists) {
+            catID = categoryFound._id;
+        } else { 
+            catID = defaultCategory._id;
+        }
+
+        await tagService.create(name, html, description, catID, validAttrs);
+        
+    });
+
+    const TAcceptance = await Promise.all(tagsPromises);
+    tagsSpinner.succeed("Tags loaded");
 }
 
 runInstallation();

@@ -1,0 +1,71 @@
+[
+    {
+        "name": "HTML Raiz",
+        "html": "html",
+        "description": "Representa la raiz de un documento HTML. El resto de elementos descienden de este elemento.",
+        "category": "root",
+        "validAttrs": []
+    },
+    {
+        "name": "Título",
+        "html": "title", 
+        "description": "Define el título del documento. El título debe ser solo texto y se muestra en la barra de título del navegador o en la pestaña de la página.",
+        "category": "metadata",
+        "validAttrs": []
+    },
+    {
+        "name": "Cuerpo del documento",
+        "html": "body",
+        "description": "Define el cuerpo del documento. El elemento <body> contiene todo el contenido de un documento HTML, como encabezados, párrafos, imágenes, hipervínculos, tablas, listas, etc.",
+        "category": "basic-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Bloque principal",
+        "html": "main",
+        "description": "Representa el contenido principal del <body> de un documento o aplicación. El área principal del contenido consiste en el contenido que está directamente relacionado, o se expande sobre el tema central de un documento o la funcionalidad central de una aplicación. Este contenido debe ser único al documento, excluyendo cualquier contenido que se repita a través de un conjunto de documentos como barras laterales, enlaces de navegación, información de derechos de autor, logos del sitio y formularios de búsqueda",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Lista no ordenada",
+        "html": "ul",
+        "description": "De \"unordered list\" -lista no ordenada. Crea una lista no ordenada en el documento.",
+        "category": "text-content",
+        "validAttrs": [
+            {
+                "name": "type",
+                "description": "Indica el estilo de los items de la lista.",
+                "validOptions": ["disc", "square", "circle"]
+            },
+            {
+                "name": "compact",
+                "description": "Indica que la lista debe mostrase conpactada.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Enlace",
+        "html": "a",
+        "description": "El Elemento HTML Anchor <a> crea un enlace a otras páginas de internet, archivos o ubicaciones dentro de la misma página, direcciones de correo, o cualquier otra URL.",
+        "category": "semantic-inline-text",
+        "validAttrs": [
+            {
+                "name": "download",
+                "description":  "Este atributo, indica descargar a los navegadores una URL en lugar de navegar hacia ella, por lo que el usuario será dirigido para salvarla como un archivo local.  Si el atributo tiene un valor, éste se utilizará como nombre de archivo por defecto en el mensaje Guardar que se abre cuando el usuario hace clic en el enlace (sin embargo, el usuario puede cambiar el nombre antes de guardar el archivo).",
+                "validOptions": []
+            },
+            {
+                "name": "href",
+                "description": "Contiene una URL o un fragmento de URL al cual apunta el enlace.",
+                "validOptions": ["#<id>", "<path/to/file>", "<uri:file>"]
+            },
+            {
+                "name": "target",
+                "description": "Especifica en donde desplegar la URL enlazada. Es un nombre (name of), o palabra clave (keyword for), un contexto de navegación (browsing context): una pestaña, ventana, o <iframe>.",
+                "validOptions": ["_self", "_blank", "_parent", "_top"]
+            }
+        ]
+    }
+]

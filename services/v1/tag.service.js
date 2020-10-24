@@ -6,13 +6,14 @@ const Tag = require("@internal/models/Tag");
 
 const service = {};
 
-service.create = async (name, html, description, category) => {
+service.create = async (name, html, description, category, validAttrs=[]) => {
     try {
         const tag = new Tag({
             name,
             html,
             description,
             category,
+            validAttrs
         });
 
         const savedTag = await tag.save();
@@ -25,7 +26,7 @@ service.create = async (name, html, description, category) => {
     }
 };
 
-service.addValidAttr = async (tag , name, description, validOptions = ["Cualquier cadena de texto"]) => { 
+service.addValidAttr = async (tag , name, description, validOptions = []) => { 
     try {
         const lowerName = name.toLowerCase().trim();
         const attrExists = tag.validAttrs.some(attr => attr.name === lowerName);
@@ -82,7 +83,7 @@ service.deleteValidAttr = async (tag, name) => {
 
 service.findAll = async () => { 
     try {
-        const tags = await Tag.find({}) || [];
+        const tags = await Tag.find({}).populate("category") || [];
         
         return new ServiceResponse(true, tags);
     } catch (error) {

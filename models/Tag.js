@@ -32,7 +32,6 @@ const TagSchema = new Schema(
                 required: true
             },
             validOptions: [ String ]
-            
         }],
     },
     { timestamps: true,  }
