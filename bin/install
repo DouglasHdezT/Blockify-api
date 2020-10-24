@@ -28,7 +28,7 @@ const runInstallation = async () => {
         databaseSpinner.succeed("Database loaded!\n");
 
         const welcome = figlet.textSync("Blockify", {
-            font: "Soft",
+            font: "Big",
             horizontalLayout: 'default',
             verticalLayout: 'default',
             width: 90,
