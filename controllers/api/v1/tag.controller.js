@@ -1,5 +1,7 @@
 const debug = require('debug')("app:tag-controller");
+
 const tagService = require("@internal/services-v1/tag.service");
+const tagCategoryService = require("@internal/services-v1/tagCategory.service");
 
 const controller = {};
 
@@ -48,11 +50,16 @@ controller.saveTag = async (req, res) => {
             return res.status(409).json({ error: "Tag already exists!" });
         }
 
+        const { status: tagCategoryExist, content: tagCategory } =
+            await tagCategoryService.findByAbbr(category);
+        
+        if (!tagCategoryExist) return res.status(404).json({ error: "Tag category doesn't exists" });
+            
         const { status: tagCreated } = await tagService.create(
             name,
             html,
             description,
-            category
+            tagCategory._id
         );
         if (!tagCreated) {
             return res.status(409).json({ error: "Tag not created!" });
