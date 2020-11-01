@@ -43,6 +43,11 @@ validators.findByIdValidator = [
         .isMongoId().withMessage("ID must be mongo id")
 ];
 
+validators.findByHTMLValidator = [
+    param("html")
+        .notEmpty().withMessage("HTML is required")
+];
+
 validators.addAttrValidator = [
     check("tagID")
         .notEmpty().withMessage("Tag id is required!")

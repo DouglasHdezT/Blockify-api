@@ -11,6 +11,7 @@ const {
     saveTagValidator,
     updateTagValidator,
     findByIdValidator,
+    findByHTMLValidator,
     addAttrValidator,
     removeAttrValidator,
     updateAttrValidator,
@@ -20,6 +21,7 @@ const {
 // Routes registration
 router.get("/all", tagController.findAll);
 router.get("/one/:id", findByIdValidator, runValidation, tagController.findOneById);
+router.get("/byHTML/:html", findByHTMLValidator, runValidation, tagController.findOneByHTML);
 
 //Only for admins
 router.use(roleValidatorHelper(ROLES.ADMIN));
