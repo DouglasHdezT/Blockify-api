@@ -22,9 +22,22 @@ controller.findOneById = async (req, res) => {
 
         return res.status(200).json(tag);
     } catch (error) {
-        throw error;
+        return res.status(500).json({ error: "Internal Server Error" });
     }
 };
+
+controller.findOneByHTML = async (req, res) => { 
+    try {
+        const { html } = req.params;
+
+        const { status: tagExist, content: tag } = await tagService.findOneByHTML(html);
+        if (!tagExist) return res.status(404).json({ error: "Tag not found!" });
+
+        return res.status(200).json(tag);
+    } catch (error) {
+        return res.status(500).json({ error: "Internal Server Error" });
+    }
+}
 
 controller.saveTag = async (req, res) => {
     try {

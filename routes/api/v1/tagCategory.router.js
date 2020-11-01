@@ -11,9 +11,9 @@ const { saveTagCategoryValidator, isMongoIdParam, updateCategoryTagValidator } =
 
 
 //Read
-router.get("/", userController.findAll);
+router.get("/all", userController.findAll);
 router.get("/byName/:name",userController.findByName);
-router.get("/:id", isMongoIdParam, runValidation, userController.findById);
+router.get("/one/:id", isMongoIdParam, runValidation, userController.findById);
 
 //Only for admins
 router.use(roleValidatorHelper(ROLES.ADMIN));

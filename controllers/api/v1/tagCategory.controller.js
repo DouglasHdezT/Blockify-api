@@ -29,7 +29,7 @@ controller.findById = async (req, res) => {
             return res.status(409).json({ error: "No results!" });
         }
 
-        return res.status(201).json({ tagCategory });
+        return res.status(201).json(tagCategory);
     } catch (error) {
         return res.status(500).json({ error: "Internal Server Error" });
     }
@@ -44,7 +44,7 @@ controller.findByName = async (req, res) => {
             return res.status(409).json({ error: "No results!" });
         }
 
-        return res.status(201).json({ tagCategory });
+        return res.status(201).json(tagCategory);
     } catch (error) {
         return res.status(500).json({ error: "Internal Server Error" });
     }
@@ -59,7 +59,7 @@ controller.findAll = async (req, res) => {
             return res.status(409).json({ error: "No results!" });
         }
 
-        return res.status(201).json({ tagCategories });
+        return res.status(201).json(tagCategories);
     } catch (error) {
         return res.status(500).json({ error: "Internal Server Error" });
     }
