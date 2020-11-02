@@ -10,7 +10,6 @@ const { runValidation } = require("@internal/validators-v1");
 
 //Routes
 router.get("/all", lessonController.findAll);
-
 router.post("/", createLessonValidator, runValidation, lessonController.create);
 
 module.exports = router;
