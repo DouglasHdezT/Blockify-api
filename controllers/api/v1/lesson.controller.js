@@ -18,6 +18,16 @@ controller.create = async (req, res) => {
     }
 };
 
+controller.findAll = async (req, res) => { 
+    try {
+        const { content: lessons } = await lessonService.findAll();
+
+        return res.status(200).json(lessons);
+    } catch (error) {
+        return res.status(500).json({ error: "Internal server error" });
+    }
+}
+
 //TODO: Implement other methods 
 
 module.exports = controller;
