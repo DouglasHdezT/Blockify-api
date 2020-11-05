@@ -73,7 +73,7 @@ service.findAll = async () => {
 
 service.updateOne = async (id, fieldsToUpdate) => {
     try {
-        const fieldsSanitized = sanitizeObject(fieldsSanitized);
+        const fieldsSanitized = sanitizeObject(fieldsToUpdate);
         
         const tagCategoryUpdated = await TagCategory.findByIdAndUpdate(id, { ...fieldsSanitized });
         console.log(tagCategoryUpdated);

@@ -27,8 +27,7 @@ validators.updateTagValidator = [
         .optional()
         .notEmpty().withMessage("Description is required!"),
     check("category")
-        .optional()
-        .notEmpty().withMessage("Category is required!"),
+        .isEmpty().withMessage("Category is required!"),
 ];
 
 validators.deleteTagValidator = [
