@@ -9,6 +9,7 @@ const userRouter = require("./user.router");
 const avatarRouter = require("./avatar.router");
 const tagCategoryRouter = require("./tagCategory.router");
 const tagRouter = require('./tag.router');
+const lessonRouter = require("./lesson.router");
 
 //Register routes
 
@@ -24,5 +25,6 @@ router.use(authRequired);
 router.use("/user", userRouter);
 router.use("/tagCategory", tagCategoryRouter);
 router.use('/tag', tagRouter);
+router.use("/lesson", lessonRouter);
 
 module.exports = router;

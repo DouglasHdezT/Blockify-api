@@ -62,7 +62,7 @@ controller.findMyLessons = async (req, res) => {
         const { _id: userID } = req.user;
         const { content: userLessons } = await lessonService.findAllByUser(userID);
 
-        return res.status(200).json(lessonService);
+        return res.status(200).json(userLessons);
     } catch (error) {
         return res.status(500).json({error: "Internal server error"});
     }
