@@ -47,7 +47,6 @@ const UserSchema = new Schema(
                     userID: {
                         type: Schema.Types.ObjectId,
                         required: true,
-                        //When array is empty
                     },
                     rate: {
                         type: Number,
@@ -66,7 +65,7 @@ const UserSchema = new Schema(
                 // To avoid 0/0 use || 0;
                 const prom = sum / starsArray.length || 0;
                 return {
-                    stars: prom,
+                    rate: prom,
                     votes: starsArray.length
                 };
             },

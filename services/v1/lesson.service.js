@@ -83,4 +83,61 @@ service.deleteById = async (lessonID) => {
     }
 }
 
+/**
+ * Stars Methods
+ */
+
+service.addStar = async (lesson, userID, rate) => { 
+    try {
+        const lessonUpdated = await Lesson.findByIdAndUpdate(lesson._id, {
+            $push: {
+                stars: {
+                    userID,
+                    rate
+                }
+            }
+        });
+
+        if (!lessonUpdated) return new ServiceResponse(false, { error: "Cannot push rate" });
+
+        return new ServiceResponse(true, { message: "Rate added" });
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+service.deleteStar = async (lesson, userID) => { 
+    try {
+        const stars = lesson.get("stars", null, { getters: false });
+        const indexOf = stars.findIndex(star => star.userID.equals(userID));
+
+        stars.splice(indexOf, 1);
+
+        const lessonUpdated = await lesson.save();
+
+        if (!lessonUpdated) return new ServiceResponse(false, { error: "Cannot delete Star" });
+
+        return new ServiceResponse(true, { message: "Star deleted" });
+    } catch (error) {
+        throw error;
+    }
+}
+
+service.updateStar = async (lesson, userID, rate) => { 
+    try {
+        const stars = lesson.get("stars", null, { getters: false });
+        const indexOf = stars.findIndex(star => star.userID.equals(userID));
+
+        stars[indexOf].rate = rate;
+
+        const lessonUpdated = await lesson.save();
+
+        if (!lessonUpdated) return new ServiceResponse(false, { error: "Cannot update Star" });
+
+        return new ServiceResponse(true, { message: "Rate updated" });
+    } catch (error) {
+        throw error;
+    }
+}
 module.exports = service;
