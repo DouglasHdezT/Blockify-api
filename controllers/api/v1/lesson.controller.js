@@ -164,7 +164,7 @@ controller.deleteRate = async (req, res, next) => {
 controller.updateRate = async (req, res, next) => {
     try{
         const { _id: myUserID } = req.user;
-        const { lessonID } = req.body;
+        const { lessonID, rate } = req.body;
 
         const { status: lessonExists, content: lesson } = await lessonService.findById(lessonID);
         if (!lessonExists) return res.status(404).json({ error: "Lesson not found" });
@@ -172,7 +172,7 @@ controller.updateRate = async (req, res, next) => {
         const alreadyRated = lesson.isUserInStars(myUserID);
         if (!alreadyRated) return res.status(409).json({ error: "Didn't rate yet" });
 
-        const { status: rateUpdated } = await lessonService.addStar(lesson, myUserID, rate);
+        const { status: rateUpdated } = await lessonService.updateStar(lesson, myUserID, rate);
         if (!rateUpdated) return res.status(409).json({ error: "Cannot update rate" });
 
         return res.status(201).json({ message: "Rate updated!" });

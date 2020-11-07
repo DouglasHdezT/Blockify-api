@@ -69,4 +69,6 @@ LessonSchema.methods = {
     }
 }
 
+LessonSchema.set("toJSON", { getters: true }); 
+
 module.exports = mongoose.model("Lesson", LessonSchema);
