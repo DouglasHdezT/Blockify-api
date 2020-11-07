@@ -132,4 +132,6 @@ UserSchema.methods = {
     }
 };
 
+UserSchema.set("toJSON", { getters: true });
+
 module.exports = mongoose.model("User", UserSchema);
