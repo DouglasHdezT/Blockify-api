@@ -3,7 +3,7 @@ const userService = require("@internal/services-v1/user.service");
 
 const controller = {};
 
-controller.create = async (req, res) => {
+controller.create = async (req, res, next) => {
     try {
         const { user } = req;
         const { title, content, description, private } = req.body;
@@ -15,21 +15,21 @@ controller.create = async (req, res) => {
 
         return res.status(201).json({ message: "Lesson created!" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 };
 
-controller.findAll = async (req, res) => {
+controller.findAll = async (req, res, next) => {
     try {
         const { content: lessons } = await lessonService.findAll();
 
         return res.status(200).json(lessons);
     } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 }
 
-controller.findById = async (req, res) => {
+controller.findById = async (req, res, next) => {
     try {
         const { id } = req.params;
         const {status: lessonExists, content: lesson } = await lessonService.findById(id);
@@ -38,11 +38,11 @@ controller.findById = async (req, res) => {
 
         return res.status(200).json(lesson);
     } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 }
 
-controller.findByUserID = async (req, res) => { 
+controller.findByUserID = async (req, res, next) => { 
     try {
         const { id: userID } = req.params;
 
@@ -53,22 +53,22 @@ controller.findByUserID = async (req, res) => {
 
         return res.status(200).json(userLessons);
     } catch (error) {
-        return res.status(500).json({error: "Internal server error"})
+        next(error);
     }
 }
 
-controller.findMyLessons = async (req, res) => { 
+controller.findMyLessons = async (req, res, next) => { 
     try {
         const { _id: userID } = req.user;
         const { content: userLessons } = await lessonService.findAllByUser(userID);
 
         return res.status(200).json(userLessons);
     } catch (error) {
-        return res.status(500).json({error: "Internal server error"});
+        next(error);
     }
 }
 
-controller.update = async (req, res) => {
+controller.update = async (req, res, next) => {
     try {
         const { id } = req.body;
         const { _id: userID } = req.user;
@@ -90,11 +90,11 @@ controller.update = async (req, res) => {
 
         return res.status(201).json({ message: "Updated" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 }
 
-controller.delete = async (req, res) => { 
+controller.delete = async (req, res, next) => { 
     try {
         const { id } = req.body;
         const { _id: userID } = req.user;
@@ -113,7 +113,7 @@ controller.delete = async (req, res) => {
 
         return res.status(200).json({ message: "Lesson deleted" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 }
 

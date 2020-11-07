@@ -4,7 +4,7 @@ const { createToken } = require("@internal/utils/jwt.tools");
 
 const controller = {};
 
-controller.register = async (req, res) => { 
+controller.register = async (req, res, next) => { 
     try {
         const { username, email } = req.body;
         
@@ -16,11 +16,11 @@ controller.register = async (req, res) => {
 
         return res.status(201).json({ message: "User registered" })
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.login = async (req, res) => { 
+controller.login = async (req, res, next) => { 
     try {
         const { identifier, password } = req.body;
 
@@ -43,7 +43,7 @@ controller.login = async (req, res) => {
 
         return res.status(200).json({token: token});
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error)
     }
 }
 

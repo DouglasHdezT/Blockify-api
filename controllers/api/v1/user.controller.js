@@ -2,7 +2,7 @@ const userService = require('@internal/services-v1/user.service');
 
 const controller = {};
 
-controller.update = async (req, res) => {
+controller.update = async (req, res, next) => {
     try {
 
         const { _id } = req.user;
@@ -23,11 +23,11 @@ controller.update = async (req, res) => {
 
         return res.status(201).json({ message: "Updated" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.delete = async (req, res) => {
+controller.delete = async (req, res, next) => {
     try {
 
         const { _id } = req.user;
@@ -42,7 +42,7 @@ controller.delete = async (req, res) => {
 
         return res.status(201).json({ message: "Deleted" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
@@ -50,7 +50,7 @@ controller.delete = async (req, res) => {
  * Rate methods
  */
 
-controller.addRate = async (req, res) => { 
+controller.addRate = async (req, res, next) => { 
     try {
         const { _id: myUserID } = req.user;
         const { userID, rate } = req.body;
@@ -66,12 +66,11 @@ controller.addRate = async (req, res) => {
 
         return res.status(201).json({ message: "Rate added!" });
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.getRate = async (req, res) => { 
+controller.getRate = async (req, res, next) => { 
     try {
         const { id } = req.params;
         
@@ -83,11 +82,11 @@ controller.getRate = async (req, res) => {
             rate: user.stars
         });
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.deleteRate = async (req, res) => { 
+controller.deleteRate = async (req, res, next) => { 
     try {
         const { _id: myUserID } = req.user;
         const { userID } = req.body;
@@ -103,12 +102,11 @@ controller.deleteRate = async (req, res) => {
         
         return res.status(200).json({ message: "Rate deleted" });
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 }
 
-controller.updateRate = async (req, res) => { 
+controller.updateRate = async (req, res, next) => { 
     try {
         const { _id: myUserID } = req.user;
         const { userID, rate } = req.body;
@@ -124,8 +122,7 @@ controller.updateRate = async (req, res) => {
         
         return res.status(200).json({ message: "Rate Updated" });
     } catch (error) {
-        console.log(error);
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 }
 

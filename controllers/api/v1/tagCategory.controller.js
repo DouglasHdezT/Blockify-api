@@ -2,7 +2,7 @@ const tagCategoryService = require('@internal/services-v1/tagCategory.service');
 
 const controller = {};
 
-controller.saveTagCategory = async (req, res) => {
+controller.saveTagCategory = async (req, res, next) => {
     try {
         const { name, description, abbr } = req.body
 
@@ -16,11 +16,11 @@ controller.saveTagCategory = async (req, res) => {
 
         return res.status(201).json({ message: "Tag Category created" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.findById = async (req, res) => {
+controller.findById = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { status: tagCategoryExist, content: tagCategory } = await tagCategoryService.findById(id);
@@ -31,11 +31,11 @@ controller.findById = async (req, res) => {
 
         return res.status(201).json(tagCategory);
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.findByName = async (req, res) => {
+controller.findByName = async (req, res, next) => {
     try {
         const { name } = req.params;
         const { status: tagCategoryExist, content: tagCategory } = await tagCategoryService.findByName(name);
@@ -46,11 +46,11 @@ controller.findByName = async (req, res) => {
 
         return res.status(201).json(tagCategory);
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.findAll = async (req, res) => {
+controller.findAll = async (req, res, next) => {
     try {
 
         const { status: results, content: tagCategories } = await tagCategoryService.findAll();
@@ -61,11 +61,11 @@ controller.findAll = async (req, res) => {
 
         return res.status(201).json(tagCategories);
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.update = async (req, res) => {
+controller.update = async (req, res, next) => {
     try {
 
         const { id, abbr } = req.body;
@@ -83,11 +83,11 @@ controller.update = async (req, res) => {
 
         return res.status(201).json({ message: "Updated" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.delete = async (req, res) => {
+controller.delete = async (req, res, next) => {
     try {
         const { id } = req.body;
 
@@ -99,7 +99,7 @@ controller.delete = async (req, res) => {
 
         return res.status(201).json({ message: "Deleted" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
