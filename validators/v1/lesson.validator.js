@@ -47,4 +47,23 @@ validator.deleteLessonValidator = [
         .isMongoId().withMessage("Id must be Mongo id"),
 ]
 
+/**
+ * Rate validators
+ */
+
+validator.addRateValidator = [
+    check("lessonID")
+        .notEmpty().withMessage("LessonID is required!")
+        .isMongoId().withMessage("LessonID must be an Mongo ID"),
+    check("rate")
+        .notEmpty().withMessage("Rate is required!")
+        .isFloat({ min: 0, max: 5 }).withMessage("Rate must be number and between 0 and 5"),
+];
+
+validator.deleteRateValidator = [
+    check("lessonID")
+        .notEmpty().withMessage("LessonID is required!")
+        .isMongoId().withMessage("LessonID must be an Mongo ID"),
+];
+
 module.exports = validator;

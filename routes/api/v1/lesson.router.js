@@ -7,7 +7,9 @@ const {
     createLessonValidator,
     idAsParam,
     updateLessonValidator,
-    deleteLessonValidator
+    deleteLessonValidator,
+    addRateValidator,
+    deleteRateValidator
 } = require("@internal/validators-v1/lesson.validator");
 const { runValidation } = require("@internal/validators-v1");
 
@@ -20,5 +22,10 @@ router.get("/myLessons", lessonController.findMyLessons);
 router.post("/", createLessonValidator, runValidation, lessonController.create);
 router.put("/", updateLessonValidator, runValidation, lessonController.update);
 router.delete("/", deleteLessonValidator, runValidation, lessonController.delete);
+
+//Rate methods
+router.post("/rate", addRateValidator, runValidation, lessonController.addRate);
+router.put("/rate", addRateValidator, runValidation, lessonController.updateRate);
+router.delete("/rate", deleteRateValidator, runValidation, lessonController.deleteRate);
 
 module.exports = router;
