@@ -7,6 +7,7 @@ const cors = require('cors');
 var indexRouter = require('./routes/index.router');
 const database = require("./config/database");
 const { limiter } = require("./config/rateLimiter");
+const { errorHandler } = require("@internal/middlewares-v1/handlers.midleware");
 
 var app = express();
 database.connect();
@@ -23,5 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+
+app.use(errorHandler);
 
 module.exports = app;

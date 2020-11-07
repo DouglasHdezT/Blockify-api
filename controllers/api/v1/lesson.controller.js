@@ -3,7 +3,7 @@ const userService = require("@internal/services-v1/user.service");
 
 const controller = {};
 
-controller.create = async (req, res) => {
+controller.create = async (req, res, next) => {
     try {
         const { user } = req;
         const { title, content, description, private } = req.body;
@@ -15,21 +15,21 @@ controller.create = async (req, res) => {
 
         return res.status(201).json({ message: "Lesson created!" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 };
 
-controller.findAll = async (req, res) => {
+controller.findAll = async (req, res, next) => {
     try {
         const { content: lessons } = await lessonService.findAll();
 
         return res.status(200).json(lessons);
     } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 }
 
-controller.findById = async (req, res) => {
+controller.findById = async (req, res, next) => {
     try {
         const { id } = req.params;
         const {status: lessonExists, content: lesson } = await lessonService.findById(id);
@@ -38,11 +38,11 @@ controller.findById = async (req, res) => {
 
         return res.status(200).json(lesson);
     } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 }
 
-controller.findByUserID = async (req, res) => { 
+controller.findByUserID = async (req, res, next) => { 
     try {
         const { id: userID } = req.params;
 
@@ -53,22 +53,22 @@ controller.findByUserID = async (req, res) => {
 
         return res.status(200).json(userLessons);
     } catch (error) {
-        return res.status(500).json({error: "Internal server error"})
+        next(error);
     }
 }
 
-controller.findMyLessons = async (req, res) => { 
+controller.findMyLessons = async (req, res, next) => { 
     try {
         const { _id: userID } = req.user;
         const { content: userLessons } = await lessonService.findAllByUser(userID);
 
         return res.status(200).json(userLessons);
     } catch (error) {
-        return res.status(500).json({error: "Internal server error"});
+        next(error);
     }
 }
 
-controller.update = async (req, res) => {
+controller.update = async (req, res, next) => {
     try {
         const { id } = req.body;
         const { _id: userID } = req.user;
@@ -90,11 +90,11 @@ controller.update = async (req, res) => {
 
         return res.status(201).json({ message: "Updated" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 }
 
-controller.delete = async (req, res) => { 
+controller.delete = async (req, res, next) => { 
     try {
         const { id } = req.body;
         const { _id: userID } = req.user;
@@ -113,10 +113,72 @@ controller.delete = async (req, res) => {
 
         return res.status(200).json({ message: "Lesson deleted" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal server error" });
+        next(error);
     }
 }
 
-//TODO: Implement other methods 
+/**
+ * Rate methods
+ */
+
+controller.addRate = async (req, res, next) => {
+    try{
+        const { _id: myUserID } = req.user;
+        const { lessonID, rate } = req.body;
+
+        const { status: lessonExists, content: lesson } = await lessonService.findById(lessonID);
+        if (!lessonExists) return res.status(404).json({ error: "Lesson not found" });
+
+        const alreadyRated = lesson.isUserInStars(myUserID);
+        if (alreadyRated) return res.status(409).json({ error: "Already rated" });
+
+        const { status: rateAdded } = await lessonService.addStar(lesson, myUserID, rate);
+        if (!rateAdded) return res.status(409).json({ error: "Cannot rate" });
+
+        return res.status(201).json({ message: "Rate added!" });
+    } catch (error) {
+        next(error);
+    }
+}
+
+controller.deleteRate = async (req, res, next) => {
+    try{
+        const { _id: myUserID } = req.user;
+        const { lessonID } = req.body;
+
+        const { status: lessonExists, content: lesson } = await lessonService.findById(lessonID);
+        if (!lessonExists) return res.status(404).json({ error: "Lesson not found" });
+
+        const alreadyRated = lesson.isUserInStars(myUserID);
+        if (!alreadyRated) return res.status(409).json({ error: "Didn't rate yet" });
+
+        const { status: rateDeleted } = await lessonService.deleteStar(lesson, myUserID);
+        if (!rateDeleted) return res.status(409).json({ error: "Cannot delete rate" });
+
+        return res.status(201).json({ message: "Rate deleted!" });        
+    } catch (error) {
+        next(error);
+    }
+}
+
+controller.updateRate = async (req, res, next) => {
+    try{
+        const { _id: myUserID } = req.user;
+        const { lessonID } = req.body;
+
+        const { status: lessonExists, content: lesson } = await lessonService.findById(lessonID);
+        if (!lessonExists) return res.status(404).json({ error: "Lesson not found" });
+
+        const alreadyRated = lesson.isUserInStars(myUserID);
+        if (!alreadyRated) return res.status(409).json({ error: "Didn't rate yet" });
+
+        const { status: rateUpdated } = await lessonService.addStar(lesson, myUserID, rate);
+        if (!rateUpdated) return res.status(409).json({ error: "Cannot update rate" });
+
+        return res.status(201).json({ message: "Rate updated!" });
+    } catch (error) {
+        next(error);
+    }
+}
 
 module.exports = controller;

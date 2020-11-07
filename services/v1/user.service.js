@@ -118,4 +118,61 @@ service.verifyTokenByID = async (id, token) => {
     }
 }
 
+/**
+ * Stars Methods
+ */
+
+service.addStar = async (user, userID, rate) => { 
+    try {
+        const userUpdated = await User.findByIdAndUpdate(user._id, {
+            $push: {
+                stars: {
+                    userID,
+                    rate
+                }
+            }
+        });
+
+        if (!userUpdated) return new ServiceResponse(false, { error: "Cannot push rate" });
+
+        return new ServiceResponse(true, { message: "Rate added" });
+
+    } catch (error) {
+        throw error;
+    }
+}
+
+service.deleteStar = async (user, userID) => { 
+    try {
+        const stars = user.get("stars", null, { getters: false });
+        const indexOf = stars.findIndex(star => star.userID.equals(userID));
+
+        stars.splice(indexOf, 1);
+
+        const userUpdated = await user.save();
+
+        if (!userUpdated) return new ServiceResponse(false, { error: "Cannot delete Star" });
+
+        return new ServiceResponse(true, { message: "Rate deleted" });
+    } catch (error) {
+        throw error;
+    }
+}
+
+service.updateStar = async (user, userID, rate) => { 
+    try {
+        const stars = user.get("stars", null, { getters: false });
+        const indexOf = stars.findIndex(star => star.userID.equals(userID));
+
+        stars[indexOf].rate = rate;
+
+        const userUpdated = await user.save();
+
+        if (!userUpdated) return new ServiceResponse(false, { error: "Cannot update Star" });
+
+        return new ServiceResponse(true, { message: "Rate updated" });
+    } catch (error) {
+        throw error;
+    }
+}
 module.exports = service;

@@ -41,10 +41,34 @@ const UserSchema = new Schema(
             default: true,
         },
         stars: {
-            type: Number,
-            min: 0,
-            max: 5,
-            default: 0,
+            type: [
+                {
+                    _id: false,
+                    userID: {
+                        type: Schema.Types.ObjectId,
+                        required: true,
+                    },
+                    rate: {
+                        type: Number,
+                        min: 0,
+                        max: 5,
+                        default: 0,
+                    },
+                },
+            ],
+            default: [],
+            get: function (starsArray) {
+                const sum = starsArray.reduce(
+                        (currentSum, star) => {return currentSum + star.rate}
+                    , 0);
+                
+                // To avoid 0/0 use || 0;
+                const prom = sum / starsArray.length || 0;
+                return {
+                    rate: prom,
+                    votes: starsArray.length
+                };
+            },
         },
         lessonsFav: [
             {
@@ -61,25 +85,23 @@ const UserSchema = new Schema(
         validTokens: [String],
         roles: {
             type: [String],
-            default: [ROLES.DEFAULT]
-        }
+            default: [ROLES.DEFAULT],
+        },
     },
     {
         timestamps: true,
     }
 );
 
-UserSchema
-    .virtual("password")
-    .set(function (password) { 
-        if (password === "") return;
-        
-        this.salt = this.makeSalt()
-        this.hashedPassword = this.encryptPassword(password);
-    })
+UserSchema.virtual("password").set(function (password) {
+    if (password === "") return;
+
+    this.salt = this.makeSalt();
+    this.hashedPassword = this.encryptPassword(password);
+});
 
 UserSchema.methods = {
-    comparePassword: function (input) { 
+    comparePassword: function (input) {
         return this.encryptPassword(input) === this.hashedPassword;
     },
     encryptPassword: function (password) {
@@ -90,7 +112,7 @@ UserSchema.methods = {
                 .createHash("sha256", this.salt)
                 .update(password)
                 .digest("hex");
-            
+
             return encyptedPassword;
         } catch {
             return "";
@@ -99,6 +121,15 @@ UserSchema.methods = {
     makeSalt: function () {
         return Math.round(new Date().valueOf() * Math.random()) + "";
     },
+    isUserInStars: function (userID) { 
+        if (!userID) return false;
+
+        const stars = this.get("stars", null, { getters: false });
+
+        return stars.some(star => {
+            return star.userID.equals(userID);
+        });
+    }
 };
 
 module.exports = mongoose.model("User", UserSchema);

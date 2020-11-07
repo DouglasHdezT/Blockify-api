@@ -1,21 +1,19 @@
-const debug = require('debug')("app:tag-controller");
-
 const tagService = require("@internal/services-v1/tag.service");
 const tagCategoryService = require("@internal/services-v1/tagCategory.service");
 
 const controller = {};
 
-controller.findAll = async (req, res) => {
+controller.findAll = async (req, res, next) => {
     try {
         const { content: tags } = await tagService.findAll();
 
         return res.status(200).json(tags);
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 };
 
-controller.findOneById = async (req, res) => {
+controller.findOneById = async (req, res, next) => {
     try {
         const { id } = req.params;
 
@@ -24,11 +22,11 @@ controller.findOneById = async (req, res) => {
 
         return res.status(200).json(tag);
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 };
 
-controller.findOneByHTML = async (req, res) => { 
+controller.findOneByHTML = async (req, res, next) => { 
     try {
         const { html } = req.params;
 
@@ -37,11 +35,11 @@ controller.findOneByHTML = async (req, res) => {
 
         return res.status(200).json(tag);
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.saveTag = async (req, res) => {
+controller.saveTag = async (req, res, next) => {
     try {
         const { name, html, description, category } = req.body;
 
@@ -67,11 +65,11 @@ controller.saveTag = async (req, res) => {
 
         return res.status(201).json({ message: "Post created!" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 };
 
-controller.updateOneById = async (req, res) => { 
+controller.updateOneById = async (req, res, next) => { 
     try {
         const { tagID, name, html, description, category } = req.body;
 
@@ -86,11 +84,11 @@ controller.updateOneById = async (req, res) => {
 
         return res.status(200).json({ message: "Tag updated!" });
     } catch (error) {
-        
+        next(error)
     }
 }
 
-controller.deleteOneByID = async (req, res) => { 
+controller.deleteOneByID = async (req, res, next) => { 
     try {
         const { tagID } = req.body;
 
@@ -102,12 +100,12 @@ controller.deleteOneByID = async (req, res) => {
 
         return res.status(200).json({ message: "Tag deleted!" });
     } catch (error) {
-        throw error;
+        next(error);
     }
 }
 
 /** @type {import('express').RequestHandler} */
-controller.addValidAttr = async (req, res) => { 
+controller.addValidAttr = async (req, res, next) => { 
     try {
         const { tagID, name, description, validOptions } = req.body;
         
@@ -125,11 +123,11 @@ controller.addValidAttr = async (req, res) => {
 
         return res.status(200).json({ message: "Attr added" })
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.updateValidAttr = async (req, res) => { 
+controller.updateValidAttr = async (req, res, next) => { 
     try {
         const { tagID, name, description, validOptions } = req.body; 
         
@@ -141,11 +139,11 @@ controller.updateValidAttr = async (req, res) => {
 
         return res.status(200).json({ message: "Attribute updated" });
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
-controller.removeValidAttr = async (req, res) => { 
+controller.removeValidAttr = async (req, res, next) => { 
     try {
         const { tagID, attrName } = req.body;
 
@@ -161,7 +159,7 @@ controller.removeValidAttr = async (req, res) => {
 
         return res.status(200).json({ message: "Attribute removed" });        
     } catch (error) {
-        return res.status(500).json({ error: "Internal Server Error" });
+        next(error);
     }
 }
 
