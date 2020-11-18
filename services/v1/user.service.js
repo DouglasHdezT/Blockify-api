@@ -93,7 +93,8 @@ service.insertValidToken = async (user, token) => {
 service.findOneById = async (id) => {
     try {
         const user = await User.findById(id)
-            .select("-hashedPassword -validTokens -salt");
+            .select("-hashedPassword -validTokens -salt")
+            .populate("comments");
 
         if (!user) return new ServiceResponse(false, { error: "User not found" });
 
@@ -203,4 +204,5 @@ service.removeComment = async (user, comment) => {
         throw error;
     }
 }
+
 module.exports = service;

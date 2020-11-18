@@ -131,6 +131,22 @@ controller.updateRate = async (req, res, next) => {
  * Comments methods
  */
 
+controller.getComments = async (req, res, next) => {
+    try{
+        const { id } = req.params;
+
+        const { status: userExists, content: user } = await userService.findOneById(id);
+        if (!userExists) return res.status(404).json({ error: "User not found" });
+
+        return res.status(200).json({
+            username: user.username,
+            comments: user.comments
+        });
+    } catch (error) {
+        next(error);
+    }
+}
+
 controller.addComment = async (req, res, next) => {
     try{
         const { _id: myUserID } = req.user;
@@ -144,7 +160,10 @@ controller.addComment = async (req, res, next) => {
         
         if(!commentCreated) return res.status(409).json({ error: "Comment not created" });
 
-        
+        const { status: commentAdded } = await userService.addComment(user, comment);
+        if(!commentAdded) return res.status(409).json({ error: "Comment not added" });
+
+        return res.status(200).json({ message: "Comment added" });
     } catch (error) {
         next(error);
     }
