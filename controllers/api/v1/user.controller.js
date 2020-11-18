@@ -1,4 +1,5 @@
 const userService = require('@internal/services-v1/user.service');
+const commentService = require('@internal/services-v1/comment.service');
 
 const controller = {};
 
@@ -121,6 +122,29 @@ controller.updateRate = async (req, res, next) => {
         if (!rateUpdated) return res.status(409).json({ error: "Cannot update rate" });
         
         return res.status(200).json({ message: "Rate Updated" });
+    } catch (error) {
+        next(error);
+    }
+}
+
+/**
+ * Comments methods
+ */
+
+controller.addComment = async (req, res, next) => {
+    try{
+        const { _id: myUserID } = req.user;
+        const { userID } = req.body;
+
+        const { status: userExists, content: user } = await userService.findOneById(userID);
+        if (!userExists) return res.status(404).json({ error: "User not found" });
+
+        const { status: commentCreated, content: comment }
+            = await commentService.create(req.body, myUserID);
+        
+        if(!commentCreated) return res.status(409).json({ error: "Comment not created" });
+
+        
     } catch (error) {
         next(error);
     }

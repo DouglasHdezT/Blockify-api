@@ -175,4 +175,32 @@ service.updateStar = async (user, userID, rate) => {
         throw error;
     }
 }
+
+/**
+ * Comments methods
+ */
+
+service.addComment = async (user, comment) => {
+    try{
+        user.comments = [...user.comments, comment._id];
+        const userSaved = await user.save();
+
+        if (!userSaved) return new ServiceResponse(false, { error: "Cannot add comment" });
+        return new ServiceResponse(true, { message: "Comment added" });
+    } catch (error) {
+        throw error;
+    }
+}
+
+service.removeComment = async (user, comment) => {
+    try{
+        user.comments = user.comments.filter(commentA => !commentA._id.equals(comment._id));
+        const userSaved = await user.save();
+
+        if (!userSaved) return new ServiceResponse(false, { error: "Cannot remove comment" });
+        return new ServiceResponse(true, { message: "Comment deleted" });
+    } catch (error) {   
+        throw error;
+    }
+}
 module.exports = service;
