@@ -11,6 +11,11 @@ validator.addRateValidator = [
         .isFloat({ min: 0, max: 5 }).withMessage("Rate must be number and between 0 and 5"),
 ];
 
+validator.addTakenLesson = [
+    check('lesson').notEmpty().withMessage('Lesson id es required!')
+        .isMongoId().withMessage('lesson must be an Mongo ID')
+];
+
 validator.deleteRateValidator = [
     check("userID")
         .notEmpty().withMessage("UserID is required!")

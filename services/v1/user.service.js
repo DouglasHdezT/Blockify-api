@@ -21,7 +21,7 @@ service.findOneByUsernameOrEmail = async (username, email) => {
     }
 }
 
-service.register = async ({ username, email, password, firstname, lastname, avatar }, isAdmin=false) => {
+service.register = async ({ username, email, password, firstname, lastname, avatar }, isAdmin = false) => {
     try {
         const user = new User({
             username,
@@ -32,7 +32,7 @@ service.register = async ({ username, email, password, firstname, lastname, avat
             avatar
         });
 
-        if (isAdmin) { 
+        if (isAdmin) {
             user.roles = [ROLES.DEFAULT, ROLES.ADMIN];
         }
 
@@ -54,6 +54,22 @@ service.update = async (id, fieldsToUpdate) => { // los nombres, el username y e
         if (!userUpdated) return new ServiceResponse(false, { error: "User didn't update" });
 
         return new ServiceResponse(true, userUpdated);
+    } catch (error) {
+        throw error;
+    }
+}
+
+service.addTakenLesson = async (userId, lessonId) => {
+    try {
+        const added = await User.findByIdAndUpdate(userId, {
+            $push: {
+                lessonTaken: lessonId
+            }
+        });
+
+        if (!added) return new ServiceResponse(false, { error: 'No se pudo agregar la leccion' });
+
+        return new ServiceResponse(true, null);
     } catch (error) {
         throw error;
     }
@@ -123,7 +139,7 @@ service.verifyTokenByID = async (id, token) => {
  * Stars Methods
  */
 
-service.addStar = async (user, userID, rate) => { 
+service.addStar = async (user, userID, rate) => {
     try {
         const userUpdated = await User.findByIdAndUpdate(user._id, {
             $push: {
@@ -143,7 +159,7 @@ service.addStar = async (user, userID, rate) => {
     }
 }
 
-service.deleteStar = async (user, userID) => { 
+service.deleteStar = async (user, userID) => {
     try {
         const stars = user.get("stars", null, { getters: false });
         const indexOf = stars.findIndex(star => star.userID.equals(userID));
@@ -160,7 +176,7 @@ service.deleteStar = async (user, userID) => {
     }
 }
 
-service.updateStar = async (user, userID, rate) => { 
+service.updateStar = async (user, userID, rate) => {
     try {
         const stars = user.get("stars", null, { getters: false });
         const indexOf = stars.findIndex(star => star.userID.equals(userID));
@@ -182,7 +198,7 @@ service.updateStar = async (user, userID, rate) => {
  */
 
 service.addComment = async (user, comment) => {
-    try{
+    try {
         user.comments = [...user.comments, comment._id];
         const userSaved = await user.save();
 
@@ -194,13 +210,13 @@ service.addComment = async (user, comment) => {
 }
 
 service.removeComment = async (user, comment) => {
-    try{
+    try {
         user.comments = user.comments.filter(commentA => !commentA._id.equals(comment._id));
         const userSaved = await user.save();
 
         if (!userSaved) return new ServiceResponse(false, { error: "Cannot remove comment" });
         return new ServiceResponse(true, { message: "Comment deleted" });
-    } catch (error) {   
+    } catch (error) {
         throw error;
     }
 }

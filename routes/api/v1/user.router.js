@@ -3,8 +3,9 @@ const router = express.Router();
 
 const userController = require("@internal/controllers-v1/user.controller");
 
-const { 
+const {
     addRateValidator,
+    addTakenLesson,
     deleteRateValidator,
     idInParamsValidator,
     addCommentValidator,
@@ -14,6 +15,7 @@ const { runValidation } = require("@internal/validators-v1");
 
 //Update
 router.put('/', userController.update);
+router.put('/addTakenLesson', addTakenLesson, runValidation, userController.addTakenLesson);
 
 //Delete
 router.delete('/', userController.delete);

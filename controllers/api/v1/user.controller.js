@@ -28,6 +28,20 @@ controller.update = async (req, res, next) => {
     }
 }
 
+controller.addTakenLesson = async (req, res, next) => {
+    try {
+        const { lesson } = req.body;
+
+        const { status: added } = await userService.addTakenLesson(req.user, lesson);
+
+        if (!added) return res.status(409).json({ error: "No se pudo agregar" });
+
+        return res.status(201).json({ message: "Added!" });
+    } catch (error) {
+        next(error);
+    }
+}
+
 controller.delete = async (req, res, next) => {
     try {
 
@@ -51,17 +65,17 @@ controller.delete = async (req, res, next) => {
  * Rate methods
  */
 
-controller.addRate = async (req, res, next) => { 
+controller.addRate = async (req, res, next) => {
     try {
         const { _id: myUserID } = req.user;
         const { userID, rate } = req.body;
 
         const { status: userExists, content: user } = await userService.findOneById(userID);
         if (!userExists) return res.status(404).json({ error: "User not found" });
-        
+
         const alreadyRated = user.isUserInStars(myUserID);
         if (alreadyRated) return res.status(409).json({ error: "Already rated!" });
-        
+
         const { status: rateAdded } = await userService.addStar(user, myUserID, rate);
         if (!rateAdded) return res.status(409).json({ error: "Cannot rate" });
 
@@ -71,10 +85,10 @@ controller.addRate = async (req, res, next) => {
     }
 }
 
-controller.getRate = async (req, res, next) => { 
+controller.getRate = async (req, res, next) => {
     try {
         const { id } = req.params;
-        
+
         const { status: userExists, content: user } = await userService.findOneById(id);
         if (!userExists) return res.status(404).json({ error: "User not found" });
 
@@ -87,40 +101,40 @@ controller.getRate = async (req, res, next) => {
     }
 }
 
-controller.deleteRate = async (req, res, next) => { 
+controller.deleteRate = async (req, res, next) => {
     try {
         const { _id: myUserID } = req.user;
         const { userID } = req.body;
 
         const { status: userExists, content: user } = await userService.findOneById(userID);
         if (!userExists) return res.status(404).json({ error: "User not found" });
-        
+
         const alreadyRated = user.isUserInStars(myUserID);
         if (!alreadyRated) return res.status(409).json({ error: "didn't rated!" });
 
         const { status: rateDeleted } = await userService.deleteStar(user, myUserID);
         if (!rateDeleted) return res.status(409).json({ error: "Cannot delete rate" });
-        
+
         return res.status(200).json({ message: "Rate deleted" });
     } catch (error) {
         next(error);
     }
 }
 
-controller.updateRate = async (req, res, next) => { 
+controller.updateRate = async (req, res, next) => {
     try {
         const { _id: myUserID } = req.user;
         const { userID, rate } = req.body;
 
         const { status: userExists, content: user } = await userService.findOneById(userID);
         if (!userExists) return res.status(404).json({ error: "User not found" });
-        
+
         const alreadyRated = user.isUserInStars(myUserID);
         if (!alreadyRated) return res.status(409).json({ error: "didn't rated!" });
 
         const { status: rateUpdated } = await userService.updateStar(user, myUserID, rate);
         if (!rateUpdated) return res.status(409).json({ error: "Cannot update rate" });
-        
+
         return res.status(200).json({ message: "Rate Updated" });
     } catch (error) {
         next(error);
@@ -132,7 +146,7 @@ controller.updateRate = async (req, res, next) => {
  */
 
 controller.getComments = async (req, res, next) => {
-    try{
+    try {
         const { id } = req.params;
 
         const { status: userExists, content: user } = await userService.findOneById(id);
@@ -148,7 +162,7 @@ controller.getComments = async (req, res, next) => {
 }
 
 controller.addComment = async (req, res, next) => {
-    try{
+    try {
         const { _id: myUserID } = req.user;
         const { userID } = req.body;
 
@@ -157,11 +171,11 @@ controller.addComment = async (req, res, next) => {
 
         const { status: commentCreated, content: comment }
             = await commentService.create(req.body, myUserID);
-        
-        if(!commentCreated) return res.status(409).json({ error: "Comment not created" });
+
+        if (!commentCreated) return res.status(409).json({ error: "Comment not created" });
 
         const { status: commentAdded } = await userService.addComment(user, comment);
-        if(!commentAdded) return res.status(409).json({ error: "Comment not added" });
+        if (!commentAdded) return res.status(409).json({ error: "Comment not added" });
 
         return res.status(200).json({ message: "Comment added" });
     } catch (error) {
@@ -170,7 +184,7 @@ controller.addComment = async (req, res, next) => {
 }
 
 controller.removeComment = async (req, res, next) => {
-    try{
+    try {
         const { commentID, userID } = req.body;
         const { _id: myUserID } = req.user;
 
@@ -178,15 +192,15 @@ controller.removeComment = async (req, res, next) => {
             = await userService.findOneById(userID);
 
         if (!userExists) return res.status(404).json({ error: "User not found" });
-        
+
         const { status: commentExists, content: comment }
             = await commentService.findOneByID(commentID);
 
         if (!commentExists) return res.status(404).json({ error: "Comment not found" });
-        
+
         if (!comment.creator.equals(myUserID))
             return res.status(403).json({ error: "This comment doesn't belong to you" });
-        
+
         const { status: commentRemoved } = await userService.removeComment(user, comment);
         if (!commentRemoved) return res.status(409).json({ error: "Comment not removed" });
 
