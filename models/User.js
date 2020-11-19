@@ -87,6 +87,10 @@ const UserSchema = new Schema(
             type: [String],
             default: [ROLES.DEFAULT],
         },
+        comments: [{
+            type: Schema.Types.ObjectId,
+            ref: "Comment"
+        }]
     },
     {
         timestamps: true,
