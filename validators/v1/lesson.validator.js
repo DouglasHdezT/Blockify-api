@@ -44,6 +44,9 @@ validator.updateLessonValidator = [
     check("content")
         .optional()
         .notEmpty().withMessage("Content is required"),
+    check("indications")
+        .optional()
+        .notEmpty().withMessage("Indications is required"),
     check("private")
         .optional()
         .notEmpty().withMessage("Private is required")

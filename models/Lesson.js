@@ -19,6 +19,11 @@ const LessonSchema = new Schema({
         type: String,
         required: true,
     },
+    indications: {
+        type: String,
+        required: true,
+        default: "",
+    },
     content: {
         type: [contentSchema],
         required: true,
