@@ -1,6 +1,15 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+const contentSchema = new Schema({ _id: false }, {skipVersioning: true});
+contentSchema.add({
+    father: String,
+    id: String,
+    html: String,
+    text: String,
+    children: [contentSchema]
+});
+
 const LessonSchema = new Schema({
     title: {
         type: String,
@@ -11,7 +20,7 @@ const LessonSchema = new Schema({
         required: true,
     },
     content: {
-        type: String,
+        type: [contentSchema],
         required: true,
     },
     creator: {
