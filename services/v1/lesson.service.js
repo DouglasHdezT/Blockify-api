@@ -31,7 +31,7 @@ service.findAll = async () => {
         const lessons =
             await Lesson.find({}).populate({
                 path: "creator",
-                select: "username _id",
+                select: "username _id avatar",
             }) || [];
         
         return new ServiceResponse(true, lessons);
