@@ -5,14 +5,16 @@ const { sanitizeObject } = require("@internal/utils/objects.tools");
 
 const service = {};
 
-service.create = async (title, description ,content, creator, private = false) => {
+service.create = async (title, description ,content, creator, private = false, difficulty=0, learningPath=[]) => {
     try {
         const lesson = new Lesson({
             title,
             description,
             content,
             creator,
-            private
+            private,
+            difficulty,
+            learningPath
         });
 
         const lessonSaved = await lesson.save();
@@ -61,9 +63,9 @@ service.findById = async (id) => {
     }
 }
 
-service.updateOneLesson = async (lessonID, { title, content, description, private }) => { 
+service.updateOneLesson = async (lessonID, { title, content, description, private, difficulty, learningPath }) => { 
     try {
-        const sanitizedObject = sanitizeObject({ title, content, description, private });
+        const sanitizedObject = sanitizeObject({ title, content, description, private, difficulty, learningPath });
         const lessonUpdated = await Lesson.findByIdAndUpdate(lessonID, { ...sanitizedObject });
         
         if (!lessonUpdated) return new ServiceResponse(false, { error: "Lesson didn't updated" });

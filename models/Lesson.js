@@ -42,7 +42,7 @@ const LessonSchema = new Schema({
         default: [],
         get: function (starsArray) {
             const sum = starsArray.reduce(
-                    (currentSum, star) => {return currentSum + star.rate}
+                (currentSum, star) => { return currentSum + star.rate }
                 , 0);
             
             // To avoid 0/0 use || 0;
@@ -53,6 +53,12 @@ const LessonSchema = new Schema({
             };
         },
     },
+    difficulty: {
+        type: Number,
+        enum: [0, 1, 2],
+        default: 0
+    },
+    learningPath: [String]
 }, {
     timestamps: true,
 });

@@ -6,10 +6,10 @@ const controller = {};
 controller.create = async (req, res, next) => {
     try {
         const { user } = req;
-        const { title, content, description, private } = req.body;
+        const { title, content, description, private, difficulty, learningPath } = req.body;
 
         const { status: lessonCreated } =
-            await lessonService.create(title, description, content, user._id, private);
+            await lessonService.create(title, description, content, user._id, private, difficulty, learningPath);
 
         if (!lessonCreated) return res.status(409).json({ error: "Lesson didn't created" });
 
