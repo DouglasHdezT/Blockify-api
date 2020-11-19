@@ -7,7 +7,8 @@ const {
     addRateValidator,
     deleteRateValidator,
     idInParamsValidator,
-    addCommentValidator
+    addCommentValidator,
+    removeCommentValidator
 } = require("@internal/validators-v1/user.validator");
 const { runValidation } = require("@internal/validators-v1");
 
@@ -26,5 +27,6 @@ router.put("/rate", addRateValidator, runValidation, userController.updateRate);
 //Comment methods
 router.get("/comments/:id", idInParamsValidator, runValidation, userController.getComments);
 router.post("/comment", addCommentValidator, runValidation, userController.addComment);
+router.delete("/comment", removeCommentValidator, runValidation, userController.removeComment);
 
 module.exports = router;
