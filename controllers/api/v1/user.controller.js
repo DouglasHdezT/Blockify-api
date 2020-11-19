@@ -1,5 +1,6 @@
 const userService = require('@internal/services-v1/user.service');
 const commentService = require('@internal/services-v1/comment.service');
+const lessonService = require('@internal/services-v1/lesson.service');
 
 const controller = {};
 
@@ -30,9 +31,11 @@ controller.update = async (req, res, next) => {
 
 controller.addTakenLesson = async (req, res, next) => {
     try {
-        const { lesson } = req.body;
+        const { lessonId } = req.body;
+        const { status: exist } = await lessonService.findById(lessonId);
+        if (!exist) { return res.status(409).json({ error: "No existe la leccion" }) }
 
-        const { status: added } = await userService.addTakenLesson(req.user, lesson);
+        const { status: added } = await userService.addTakenLesson(req.user._id, lessonId);
 
         if (!added) return res.status(409).json({ error: "No se pudo agregar" });
 
