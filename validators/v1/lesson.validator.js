@@ -11,8 +11,17 @@ validator.createLessonValidator = [
     check("content")
         .notEmpty().withMessage("Content is required"),
     check("private")
+        .optional()
         .notEmpty().withMessage("Private is required")
-        .isBoolean().withMessage("Private must be boolean")
+        .isBoolean().withMessage("Private must be boolean"),
+    check("difficulty")
+        .optional()
+        .notEmpty().withMessage("Difficulty is required")
+        .isIn([0, 1, 2]).withMessage("Difficulty must be 0, 1, 2"),
+    check("learningPath")
+        .optional()
+        .notEmpty().withMessage("Learning path is required")
+        .isArray().withMessage("Learning path must be an array")
 ];
 
 validator.idAsParam = [
@@ -38,7 +47,15 @@ validator.updateLessonValidator = [
     check("private")
         .optional()
         .notEmpty().withMessage("Private is required")
-        .isBoolean().withMessage("Private must be boolean")
+        .isBoolean().withMessage("Private must be boolean"),
+    check("difficulty")
+        .optional()
+        .notEmpty().withMessage("Difficulty is required")
+        .isIn([0, 1, 2]).withMessage("Difficulty must be 0, 1, 2"),
+    check("learningPath")
+        .optional()
+        .notEmpty().withMessage("Learning path is required")
+        .isArray().withMessage("Learning path must be an array")
 ]   
 
 validator.deleteLessonValidator = [
