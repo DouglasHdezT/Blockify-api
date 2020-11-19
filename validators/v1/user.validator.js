@@ -12,7 +12,7 @@ validator.addRateValidator = [
 ];
 
 validator.addTakenLesson = [
-    check('lesson').notEmpty().withMessage('Lesson id es required!')
+    check('lessonId').notEmpty().withMessage('Lesson id es required!')
         .isMongoId().withMessage('lesson must be an Mongo ID')
 ];
 
