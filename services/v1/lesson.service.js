@@ -43,7 +43,7 @@ service.findAll = async () => {
 service.findAllByUser = async (userID) => { 
     try {
         const lessons =
-            await Lesson.find({ creator: userID }).populate("creator", "username _id") || [];
+            await Lesson.find({ creator: userID }).populate("creator", "username _id avatar") || [];
 
         return new ServiceResponse(true, lessons);
     } catch (error) {
@@ -54,7 +54,7 @@ service.findAllByUser = async (userID) => {
 service.findById = async (id) => { 
     try {
         const lesson = await Lesson.findById(id)
-            .populate("creator", "username _id");
+            .populate("creator", "username _id avatar");
         if (!lesson) return new ServiceResponse(false, { error: "Lesson not found" });
 
         return new ServiceResponse(true, lesson);
