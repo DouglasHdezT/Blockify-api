@@ -169,4 +169,34 @@ controller.addComment = async (req, res, next) => {
     }
 }
 
+controller.removeComment = async (req, res, next) => {
+    try{
+        const { commentID, userID } = req.body;
+        const { _id: myUserID } = req.user;
+
+        const { status: userExists, content: user }
+            = await userService.findOneById(userID);
+
+        if (!userExists) return res.status(404).json({ error: "User not found" });
+        
+        const { status: commentExists, content: comment }
+            = await commentService.findOneByID(commentID);
+
+        if (!commentExists) return res.status(404).json({ error: "Comment not found" });
+        
+        if (!comment.creator.equals(myUserID))
+            return res.status(403).json({ error: "This comment doesn't belong to you" });
+        
+        const { status: commentRemoved } = await userService.removeComment(user, comment);
+        if (!commentRemoved) return res.status(409).json({ error: "Comment not removed" });
+
+        const { status: commentDeleted } = await commentService.delete(comment);
+        if (!commentDeleted) return res.status(409).json({ error: "Comment not deleted" });
+
+        return res.status(200).json({ message: "Comment Deleted" });
+    } catch (error) {
+        next(error);
+    }
+}
+
 module.exports = controller;
