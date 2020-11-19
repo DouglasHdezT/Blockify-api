@@ -35,9 +35,17 @@ controller.addTakenLesson = async (req, res, next) => {
         const { status: exist } = await lessonService.findById(lessonId);
         if (!exist) { return res.status(409).json({ error: "No existe la leccion" }) }
 
-        const { status: added } = await userService.addTakenLesson(req.user._id, lessonId);
+        const user = await userService.findOneById(req.user_id);
+        if (!user) {
+            return res.status(409).json({ error: "No se pudo agregar" });
+        }
 
-        if (!added) return res.status(409).json({ error: "No se pudo agregar" });
+        if (!user.content.lessonsTaken.includes(lessonId)) {
+
+            const { status: added } = await userService.addTakenLesson(req.user._id, lessonId);
+
+            if (!added) return res.status(409).json({ error: "No se pudo agregar" });
+        }
 
         return res.status(201).json({ message: "Added!" });
     } catch (error) {
