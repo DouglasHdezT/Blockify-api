@@ -75,6 +75,17 @@ service.addTakenLesson = async (userId, lessonId) => {
     }
 }
 
+service.getTakenLessons = async (id) => {
+    try {
+        const user = await User.findById(id).populate('lessonsTaken');
+
+        return new ServiceResponse(true, user.lessonsTaken);
+
+    } catch (error) {
+        throw error;
+    }
+}
+
 service.deleteOne = async (id) => {
     try {
         const deletedUser = await User.findByIdAndDelete(id);
