@@ -43,8 +43,8 @@ validator.removeCommentValidator = [
         .notEmpty().withMessage("UserID is required!")
         .isMongoId().withMessage("userID must be an Mongo ID"),
     check("commentID")
-        .notEmpty().withMessage("UserID is required!")
-        .isMongoId().withMessage("userID must be an Mongo ID"),
+        .notEmpty().withMessage("CommentID is required!")
+        .isMongoId().withMessage("CommentID must be an Mongo ID"),
 ]
 
 module.exports = validator;

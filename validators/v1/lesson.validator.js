@@ -86,4 +86,23 @@ validator.deleteRateValidator = [
         .isMongoId().withMessage("LessonID must be an Mongo ID"),
 ];
 
+validator.addCommentValidator = [
+    check("lessonID")
+        .notEmpty().withMessage("LessonID is required!")
+        .isMongoId().withMessage("LessonID must be an Mongo ID"),
+    check("title")
+        .notEmpty().withMessage("Title is required!"),
+    check("message")
+        .notEmpty().withMessage("Message is required!")
+]
+
+validator.removeCommentValidator = [
+    check("lessonID")
+        .notEmpty().withMessage("LessonID is required!")
+        .isMongoId().withMessage("lessonID must be an Mongo ID"),
+    check("commentID")
+        .notEmpty().withMessage("CommentID is required!")
+        .isMongoId().withMessage("CommentID must be an Mongo ID"),
+]
+
 module.exports = validator;

@@ -56,7 +56,13 @@ service.findById = async (id) => {
     try {
         const lesson = await Lesson.findById(id)
             .populate("creator", "username _id avatar")
-            .populate("comments");
+            .populate({
+                path: "comments",
+                populate: {
+                    path: "creator",
+                    select: "username avatar"
+                }
+            });
         if (!lesson) return new ServiceResponse(false, { error: "Lesson not found" });
 
         return new ServiceResponse(true, lesson);
