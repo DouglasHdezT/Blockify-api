@@ -77,7 +77,7 @@ service.addTakenLesson = async (userId, lessonId) => {
 
 service.getTakenLessons = async (id) => {
     try {
-        const user = await User.findById(id).populate('lessonsTaken');
+        const user = await User.findById(id).populate('lessonsTaken').populate({ path: 'lessonsTaken', populate: { path: 'creator', model: 'User', select: 'avatar username' } });
 
         return new ServiceResponse(true, user.lessonsTaken);
 
