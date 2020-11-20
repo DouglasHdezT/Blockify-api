@@ -63,7 +63,7 @@ service.addTakenLesson = async (userId, lessonId) => {
     try {
         const added = await User.findByIdAndUpdate(userId, {
             $push: {
-                lessonTaken: lessonId
+                lessonsTaken: lessonId
             }
         });
 
