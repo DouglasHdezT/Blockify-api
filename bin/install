@@ -12,6 +12,8 @@ const tagCategoriesData = require("@internal/constants/data/tagCategories.data.j
 const tagsData = require("@internal/constants/data/tags.data.json");
 const { TC } = require("@internal/constants/");
 
+const globalAttrs = require("@internal/constants/data/globalAttrs.data.json");
+
 const figlet = require("figlet");
 const chalk = require("chalk");
 const boxen = require("boxen");
@@ -199,7 +201,7 @@ const loadCatalogs = async () => {
             catID = defaultCategory._id;
         }
 
-        await tagService.create(name, html, description, catID, validAttrs);
+        await tagService.create(name, html, description, catID, [...globalAttrs ,...validAttrs]);
         
     });
 

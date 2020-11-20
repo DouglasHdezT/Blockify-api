@@ -1,0 +1,42 @@
+[
+    {
+        "name": "accesskey", 
+        "description": "Proporciona una pista para generar un atajo de teclado para el elemento actual.",
+        "validOptions": []
+    },
+    {
+        "name": "class", 
+        "description": "Una lista separada por espacios de las clases del elemento.",
+        "validOptions": []
+    },
+    {
+        "name": "dir", 
+        "description": "Un atributo enumerado que indica la direccionalidad del texto del elemento.",
+        "validOptions": ["ltr", "rtl", "auto"]
+    },
+    {
+        "name": "draggable", 
+        "description": "Un atributo enumerado que indica si el elemento se puede arrastrar mediante la API de arrastrar y soltar.",
+        "validOptions": ["true", "false"]
+    },
+    {
+        "name": "hidden", 
+        "description": "Un atributo booleano indica que el elemento aún no es o ya no es relevante. ",
+        "validOptions": ["true", "false"]
+    },
+    {
+        "name": "id", 
+        "description": "Define un identificador (ID) único que debe ser único en todo el documento. ",
+        "validOptions": []
+    }, 
+    {
+        "name": "style", 
+        "description": "Contiene declaraciones de estilo CSS que se aplicarán al elemento.",
+        "validOptions": []
+    },
+    {
+        "name": "tabindex", 
+        "description": "Un atributo entero que indica si el elemento puede tomar el foco de entrada (es enfocable), si debe participar en la navegación secuencial del teclado y, de ser así, en qué posición.",
+        "validOptions": []
+    }
+]

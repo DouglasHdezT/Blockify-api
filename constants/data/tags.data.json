@@ -8,7 +8,7 @@
     },
     {
         "name": "Título",
-        "html": "title", 
+        "html": "title",
         "description": "Define el título del documento. El título debe ser solo texto y se muestra en la barra de título del navegador o en la pestaña de la página.",
         "category": "metadata",
         "validAttrs": []
@@ -53,7 +53,7 @@
         "validAttrs": [
             {
                 "name": "download",
-                "description":  "Este atributo, indica descargar a los navegadores una URL en lugar de navegar hacia ella, por lo que el usuario será dirigido para salvarla como un archivo local.  Si el atributo tiene un valor, éste se utilizará como nombre de archivo por defecto en el mensaje Guardar que se abre cuando el usuario hace clic en el enlace (sin embargo, el usuario puede cambiar el nombre antes de guardar el archivo).",
+                "description": "Este atributo, indica descargar a los navegadores una URL en lugar de navegar hacia ella, por lo que el usuario será dirigido para salvarla como un archivo local.  Si el atributo tiene un valor, éste se utilizará como nombre de archivo por defecto en el mensaje Guardar que se abre cuando el usuario hace clic en el enlace (sin embargo, el usuario puede cambiar el nombre antes de guardar el archivo).",
                 "validOptions": []
             },
             {
@@ -67,5 +67,1820 @@
                 "validOptions": ["_self", "_blank", "_parent", "_top"]
             }
         ]
+    },
+    {
+        "name": "Cita en bloque",
+        "html": "blockquote",
+        "description": "Crea citas en bloque, marca las citas a otros autores o documentos.",
+        "category": "text-content",
+        "validAttrs": [
+            {
+                "name": "cite",
+                "description": "Proporciona un enlace al documento original o fuente",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Detalles de la descripción",
+        "html": "<dd>",
+        "description": "Provee detalles acerca de o la definición de un término precedente (<dt>) en una lista de descripciones (<dl>).",
+        "category": "text-content",
+        "validAttrs": [
+            {
+                "name": "nowrap",
+                "description": "Si el valor de este atributo es definido como yes, el texto de la definición no se encapsulará. El valor por defecto es no.",
+                "validOptions": ["yes", "no"]
+            }
+        ]
+    },
+    {
+        "name": "División ",
+        "html": "div",
+        "description": "Sirve para crear secciones o agrupar contenidos.",
+        "category": "text-content",
+        "validAttrs": [
+            {
+                "name": "datasrc",
+                "description": "Enlaza a una fuente de datos externa (individual o tabular). Reservado para posibles usos futuros.",
+                "validOptions": []
+            },
+            {
+                "name": "datafld",
+                "description": "El nombre de una propiedad o columna de datasrc. Reservado para posibles usos futuros.",
+                "validOptions": []
+            },
+            {
+                "name": "dataformatas",
+                "description": "Indica como deben ser tratados los datos obtenidos de datasrc. Reservado para posibles usos futuros.",
+                "validOptions": ["paintext", "html"]
+            },
+            {
+                "name": "align",
+                "description": "Alineación del texto.",
+                "validOptions": ["left", "center", "right", "justify"]
+            }
+        ]
+    },
+    {
+        "name": "Lista descriptiva",
+        "html": "dl",
+        "description": "Representa una lista descriptiva. El elemento encierra una lista de grupos de términos (especificados con el uso del elemento <dt>) y de descripciones (proveídas con elementos <dd>). Algunos usos comunes para este elemento son implementar un glosario o para desplegar metadatos (lista de pares llave-valor).",
+        "category": "text-content",
+        "validAttrs": []
+    },
+    {
+        "name": "Término precedente",
+        "html": "dt",
+        "description": "Especifica un término en una descripción o lista de definiciones, y como tal debe utilizarse dentro de un elemento <dl> Es usualmente seguido por un elemento <dd>; sin embargo, múltiples elementos <dt>  en un renglón indican diferentes términos los cuales todos son definidos por el siguiente elemento <dd>.",
+        "category": "text-content",
+        "validAttrs": []
+    },
+    {
+        "name": "Leyenda del contenido",
+        "html": "figcaption",
+        "description": "Representa un subtítulo o leyenda asociado al contenido del elemento padre <figure>, pudiendo ser colocado como primer o último hijo. Es importante destacar que el elemento <figcaption> es opcional.",
+        "category": "text-content",
+        "validAttrs": []
+    },
+    {
+        "name": "Contenido independiente",
+        "html": "figure",
+        "description": "Representa contenido independiente, a menudo con un título. Si bien se relaciona con el flujo principal, su posición es independiente de éste. Por lo general, se trata de una imagen, una ilustración, un diagrama, un fragmento de código, o un esquema al que se hace referencia en el texto principal, pero que se puede mover a otra página o a un apéndice sin que afecte al flujo principal.",
+        "category": "text-content",
+        "validAttrs": []
+    },
+    {
+        "name": "Ruptura temática de elementos",
+        "html": "hr",
+        "description": "Representa un cambio de tema entre párrafos (por ejemplo, un cambio de escena en una historia, un cambio de tema en una sección). En versiones previas de HTML representaba una línea horizontal. Aún puede ser representada como una línea horizontal en los navegadores visuales, pero ahora es definida en términos semánticos y no tanto en términos representativos, por tanto para dibujar una línea horizontal se debería usar el CSS apropiado.",
+        "category": "text-content",
+        "validAttrs": [
+            {
+                "name": "align",
+                "description": "Indica la alineación horizontal.",
+                "validOptions": ["left", "center", "right"]
+            },
+            {
+                "name": "noshade",
+                "description": "Elimina el relieve.",
+                "validOptions": []
+            },
+            {
+                "name": "size",
+                "description": "Indica la altura de la linea.",
+                "validOptions": []
+            },
+            {
+                "name": "width",
+                "description": "Indica la anchura.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Elemento de lista",
+        "html": "li",
+        "description": "El elemento li del ingles item list o elemento de lista declara cada uno de los elementos de una lista.",
+        "category": "text-content",
+        "validAttrs": [
+            {
+                "name": "type",
+                "description": "Estilo de numeración",
+                "validOptions": ["disc", "square", "circle"]
+            },
+            {
+                "name": "value",
+                "description": "Reinicializar número de secuencia",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Lista ordenada",
+        "html": "ol",
+        "description": "El elemento ol permite definir listas o viñetas ordenadas (“Ordered List”), bien con numeración o alfabéticamente.",
+        "category": "text-content",
+        "validAttrs": [
+            {
+                "name": "type",
+                "description": "Estilo de numeración",
+                "validOptions": ["disc", "square", "circle"]
+            },
+            {
+                "name": "compact",
+                "description": "Espacio entre objetos reducido",
+                "validOptions": []
+            },
+            {
+                "name": "start",
+                "description": "Número inicial de la secuencia",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Párrafo",
+        "html": "p",
+        "description": "El elemento p (párrafo) es el apropiado para distribuir el texto en párrafos.",
+        "category": "text-content",
+        "validAttrs": [
+            {
+                "name": "align",
+                "description": "Indica la alineación horizontal con relación al contexto",
+                "validOptions": ["left", "center", "right", "justify"]
+            }
+        ]
+    },
+    {
+        "name": "Elemento de Abreviación HTML",
+        "html": "abbr",
+        "description": "El elemento HTML <abbr> (o Elemento de Abreviación HTML) representa una abreviación o acrónimo; el atributo opcional title puede ampliar o describir la abreviatura. Si está presente, el atributo title debe contener la descripción completa y nada más.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Negrita",
+        "html": "b",
+        "description": "Indica que el texto debe ser representado con una variable bold, o negrita, de la tipografía que se esté usando.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Elemento de aislamiento Bi-Direccional",
+        "html": "bdi",
+        "description": "El elemento HTML <bdi> (o elemento de aislamiento Bi-Direccional) aisla un trozo de texto para que pueda ser formateado con una dirección diferente al texto que hay fuera de él.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Anulación de bidireccionalidad",
+        "html": "bdo",
+        "description": "La dirección de escritura del texto está relacionada con el idioma y se declara con el atributo dir. Pero en ocasiones esto no es suficiente, entonces entra en juego el elemento bdo (anulación del algoritmo bidireccional) que al anular el algoritmo permite un control total de la direccionalidad.",
+        "category": "semantic-inline-text",
+        "validAttrs": [
+            {
+                "name": "lang",
+                "description": "Información sobre el idioma del contenido del elemento y del valor de sus atributos.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Salto de línea en el texto",
+        "html": "br",
+        "description": "El elemento HTML line break <br> produce un salto de línea en el texto (retorno de carro). Es útil para escribir un poema o una dirección, donde la división de las líneas es significante.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Cita",
+        "html": "cite",
+        "description": "Marca una referencia a una fuente, o el autor de un texto citado.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Código",
+        "html": "code",
+        "description": "Es el apropiado para marcar el código de un programa.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Datos",
+        "html": "data",
+        "description": "El Elemento HTML <data> vincula un contenido dado con una traducción legible por una máquina. Si el contenido está relacionado con time- o date-, debe usarse el elemento <time>.",
+        "category": "semantic-inline-text",
+        "validAttrs": [
+            {
+                "name": "value",
+                "description": "Este atributo especifica la traducción legible por máquina del contenido del elemento.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Elemento de definición",
+        "html": "dfn",
+        "description": "Sirve para marcar el término que se quiere definir.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Marcado con énfasis",
+        "html": "em",
+        "description": "El elemento HTML <em> es el apropiado para marcar con énfasis las partes importantes de un texto. El elemento <em> puede ser anidado, con cada nivel de anidamiento indicando un mayor grado de énfasis.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Cursiva",
+        "html": "i",
+        "description": "Muestra el texto marcado con un estilo en cursiva o italica.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Marcado de texto de entrada",
+        "html": "kbd",
+        "description": "Marca el texto que debe introducir el usuario.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Marcado",
+        "html": "mark",
+        "description": "El Elemento HTML Mark <mark> representa un texto marcado o resaltado como referencia o anotación, debido a su relevancia o importancia en un contexto particular.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Cita en linea",
+        "html": "q",
+        "description": "El elemento HTML <q> indica que el texto adjunto es una cita corta en línea. La mayoría de los navegadores modernos implementan esto rodeando el texto entre comillas. Este elemento está destinado a citas breves que no requieren saltos de párrafo; para citas de bloque independiente, utiliza el elemento <blockquote>.",
+        "category": "semantic-inline-text",
+        "validAttrs": [
+            {
+                "name": "cite",
+                "description": "El valor de este atributo es una URL que designa un documento o mensaje fuente para la información citada. Este atributo está destinado a señalar información que explica el contexto o la referencia de la cita.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Pronunciación de caracteres de Asia Oriental",
+        "html": "ruby",
+        "description": "El elemento HTML<ruby> representa pequeñas anotaciones que se representan encima, debajo o al lado del texto base, que normalmente se utilizan para mostrar la pronunciación de caracteres de Asia oriental. También se puede utilizar para anotar otros tipos de texto, pero este uso es menos común.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Tachado",
+        "html": "s",
+        "description": "Muestra el texto tachado con una linea horizontal.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Sample",
+        "html": "samp",
+        "description": "El elemento HTML Sample (<samp>) se utiliza para incluir texto en línea que representa una muestra (o cita) de la salida de un programa de ordenador. El contenido de esta etiqueta es renderizado generalmente usando la tipografía monoespaciada por defecto del navegador.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Letra más pequeña",
+        "html": "small",
+        "description": "El elemento HTML <small> hace el tamaño del texto una talla más pequeña (por ejemplo, de largo a mediano, o de pequeño a extra pequeño) que el tamaño mínimo de fuente del navegador. En HTML5, este elemento es reutilizado para representar comentarios laterales y letra pequeña, incluyendo derechos de autor y texto legal, independientemente de su estilo de presentación.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Abarcar",
+        "html": "span ",
+        "description": "Es un contenedor en línea. Sirve para aplicar estilo al texto o agrupar elementos en línea.",
+        "category": "semantic-inline-text",
+        "validAttrs": [
+            {
+                "name": "datasrc",
+                "description": "Enlaza a una fuente de datos externa (individual o tabular). Reservado para posibles usos futuros.",
+                "validOptions": []
+            },
+            {
+                "name": "datafld",
+                "description": "El nombre de una propiedad o columna de datasrc. Reservado para posibles usos futuros.",
+                "validOptions": []
+            },
+            {
+                "name": "dataformatas",
+                "description": "Indica como deben ser tratados los datos obtenidos de datasrc. Reservado para posibles usos futuros.",
+                "validOptions": ["paintext", "html"]
+            }
+        ]
+    },
+    {
+        "name": "Marcado con énfasis",
+        "html": "strong",
+        "description": "El elemento strong es el apropiado para marcar con especial énfasis las partes más importantes de un texto.",
+        "category": "semantic-inline-text",
+        "validAttrs": [
+            {
+                "name": "lang",
+                "description": "Información sobre el idioma del contenido del elemento y del valor de sus atributos.",
+                "validOptions": []
+            },
+            {
+                "name": "dir",
+                "description": "Indica la dirección de texto y tablas.",
+                "validOptions": ["ltr", "rtl"]
+            }
+        ]
+    },
+    {
+        "name": "Subíndice",
+        "html": "sub",
+        "description": "El elemento HTML <sub> define un fragmento de texto que se debe mostrar, por razones tipográficas, más bajo, y generalmente más pequeño, que el tramo principal del texto, es decir, en subíndice.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Superíndice",
+        "html": "sup",
+        "description": "El elemento HTML <sup> define un fragmento de texto que se debe mostrar, por razones tipográficas, más alto, y generalmente más pequeño, que el tramo principal del texto, es decir, en superíndice.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Tiempo",
+        "html": "time",
+        "description": "El elemento HTML <time> representa un periodo específico en el tiempo. Puede incluir el atributo datetime para convertir las fechas en un formato interno legible por un ordenador, permitiendo mejores resultados en los motores de búsqueda o características personalizadas como recordatorios.",
+        "category": "semantic-inline-text",
+        "validAttrs": [
+            {
+                "name": "datetime",
+                "description": "Este atributo indica la hora y/o fecha del elemento y debe estar escrito en uno de los formatos que se muestran posteriomente.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Subrayado",
+        "html": "u",
+        "description": "Muestra el texto subrayado.",
+        "category": "semantic-inline-text",
+        "validAttrs": [
+            {
+                "name": "lang",
+                "description": "Información sobre el idioma del contenido del elemento y del valor de sus atributos.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Marcador de variables",
+        "html": "var",
+        "description": "Marca variables de programas y similares.",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Word break opportunity",
+        "html": "wbr",
+        "description": "El elemento HTML word break opportunity <wbr> representa una posición dentro del texto donde el explorador puede opcionalmente saltar una línea , aunque sus reglas de salto de línea de otra manera no crearían un salto en esa posición .",
+        "category": "semantic-inline-text",
+        "validAttrs": []
+    },
+    {
+        "name": "Área",
+        "html": "area",
+        "description": "Sirve para crear las distintas secciones en las que se puede dividir un mapas de imágenes en el cliente.",
+        "category": "multimedia",
+        "validAttrs": [
+            {
+                "name": "shape",
+                "description": "Indica la forma del área del mapa.",
+                "validOptions": ["rect", "circle", "poly", "default"]
+            },
+            {
+                "name": "coords",
+                "description": "Indica las coordenadas (x,y) del área del mapa.",
+                "validOptions": []
+            },
+            {
+                "name": "href",
+                "description": "La dirección del recurso vínculado.",
+                "validOptions": []
+            },
+            {
+                "name": "nohref",
+                "description": "Define una tecla de acceso rápido. Importante para la Accesibilidad.",
+                "validOptions": []
+            },
+            {
+                "name": "tabindex",
+                "description": "Asigna un número de posición en el orden de tabulación.",
+                "validOptions": []
+            },
+            {
+                "name": "target",
+                "description": "Indica el marco en el que se cargará el recurso.",
+                "validOptions": []
+            },
+            {
+                "name": "alt",
+                "description": "Describe el área o su vínculo, es necesario por que area no tiene contenido.",
+                "validOptions": []
+            },
+            {
+                "name": "accesskey",
+                "description": "Define una tecla de acceso rápido. Importante para la Accesibilidad.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Audio",
+        "html": "audio",
+        "description": "El elemento audio se usa para insertar contenido de audio en un documento HTML o XHTML. El elemento audio se agregó como parte de HTML 5.",
+        "category": "multimedia",
+        "validAttrs": [
+            {
+                "name": "autoplay",
+                "description": "Un atributo booleano; si se especifica (incluso aunque el valor sea \"false\"), el sonido comenzará a reproducirse automáticamente en cuanto sea posible, sin detenerse para terminar de cargar los datos.",
+                "validOptions": []
+            },
+            {
+                "name": "autobuffer",
+                "description": "Un atributo booleano; si se especifica, el sonido comenzará a reproducirse automáticamente, incluso aunque no se haya configurado para la reproducción automática. Esto continuará hasta que la caché de medios esté llena o se haya descargado el archivo de audio completo, lo que suceda primero. Debería usarse sólo si se espera que el usuario elija reproducir el audio; por ejemplo si el usuario ha navegado hasta una página usando un vínculo de \"Reproducir este audio\". Este atributo se eliminó de Gecko 2.0 (Firefox 4 / Thunderbird 3.3 / SeaMonkey 2.1) en favor del atributo preload.",
+                "validOptions": []
+            },
+            {
+                "name": "buffered",
+                "description": "Un atributo que se puede leer para determinar qué intervalos de tiempo del multimedia se han almacenado en búfer. Este atributo contiene un objeto TimeRanges.",
+                "validOptions": []
+            },
+            {
+                "name": "controls",
+                "description": "Si está presente este atributo, el navegador ofrecerá controles para permitir que el usuario controle la reproducción de audio, incluyendo volumen, búsqueda y pausar/reanudar reproducción.",
+                "validOptions": []
+            },
+            {
+                "name": "loop",
+                "description": "Un atributo booleano; si se especifica, al alcanzar el final del audio, realizaremos la búsqueda automáticamente hasta el principio.",
+                "validOptions": []
+            },
+            {
+                "name": "preload",
+                "description": "El objetivo de este atributo enumerado es proporcionar una sugerencia al navegador sobre qué cree el autor que proporcionará la mejor experiencia para el usuario.",
+                "validOptions": ["none", "metadata", "auto"]
+            },
+            {
+                "name": "src ",
+                "description": "La URL del audio que se va a insertar. Está sujeta a los Controles de acceso HTTP. Es opcional; en su lugar puedes usar el elemento source dentro del bloque de audio para especificar el audio que se va a insertar.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Imagen",
+        "html": "img",
+        "description": "El elemento de imagen HTML <img> representa una imagen en el documento.",
+        "category": "multimedia",
+        "validAttrs": [
+            {
+                "name": "vertical-align",
+                "description": "Alineamiento de la texto respecto al contexto que la rodea.",
+                "validOptions": []
+            },
+            {
+                "name": "alt",
+                "description": "Este atributo define el texto alternativo que describe la imagen, texto que los usuarios verán si la URL de la imagen es errónea o la imagen tiene un formato no soportado o si la imagen aún no se ha descargado.",
+                "validOptions": []
+            },
+            {
+                "name": "border",
+                "description": "Anchura del borde alrededor de la imagen.",
+                "validOptions": []
+            },
+            {
+                "name": "crossorigin",
+                "description": "Este atributo enumerado indica si la búsqueda de la imagen debe ser por CORS o no. Imagen hablidata CORS puede ser usada en el elemento <canvas> sin ser pintada",
+                "validOptions": ["anonymous", "use-credentials"]
+            },
+            {
+                "name": "height",
+                "description": "La altura de la imagen en píxeles CSS HTML5 o píxeles o como porcentaje en HTML 4.",
+                "validOptions": []
+            },
+            {
+                "name": "hspace",
+                "description": "El número de píxeles de espaciado a la izquierda y la derecha de la imagen.",
+                "validOptions": []
+            },
+            {
+                "name": "ismap",
+                "description": "Este atributo boleano indica que la imagen es parte del mapa del lado del servidor. Así que, se envían las coordenadas precisas de un clic",
+                "validOptions": []
+            },
+            {
+                "name": "longdesc",
+                "description": "La URL como descripción de una imagen mostrada, complementa al texto de alt.",
+                "validOptions": []
+            },
+            {
+                "name": "name",
+                "description": "El nombre para el elemento. Soportado en HTML 4 solo para compatibilidad con versiones anteriores. En su lugar, usa el atributo id.",
+                "validOptions": []
+            },
+            {
+                "name": "referrerpolicy",
+                "description": "Una cadena indicando que referencia usar cuando buscas un recurso.",
+                "validOptions": [
+                    "no-referrer",
+                    "no-referrer-when-downgrade",
+                    "origin",
+                    "origin-when-cross-origin",
+                    "unsafe-url"
+                ]
+            },
+            {
+                "name": "sizes",
+                "description": "Una lista de una o más cadenas separadas por comas indicando el tamaño de la fuente",
+                "validOptions": []
+            },
+            {
+                "name": "src",
+                "description": "La URL de la imagen. Este atributo es obligatorio para el elemento <img>. En navegadores que soportan srcset, src es tratado como imagen candidata con una densidad del píxel 1x sino una imagen estará definida en srcset o srcset contiene ancho.",
+                "validOptions": []
+            },
+            {
+                "name": "srcset",
+                "description": "Una lista de una o más cadenas separadas por comas indicando las posibles fuentes para usar.",
+                "validOptions": []
+            },
+            {
+                "name": "width",
+                "description": "El ancho de la imagen en píxeles CSS HTML5, o píxeles o porcentaje en HTML 4.",
+                "validOptions": []
+            },
+            {
+                "name": "usemap",
+                "description": "La URL parcial (empezando con '#') de un mapa de imagea asociado a un elemento.",
+                "validOptions": []
+            },
+            {
+                "name": "vspace",
+                "description": "El número de píxeles de espacio blanco insertado sobre y bajo la imagen.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Mapa de imágenes",
+        "html": "map",
+        "description": "La <map>etiqueta se utiliza para definir un mapa de imágenes. Un mapa de imagen es una imagen con áreas en las que se puede hacer clic.",
+        "category": "multimedia",
+        "validAttrs": [
+            {
+                "name": "name",
+                "description": "Sirve de referencia al atributo usemap",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Pistas de texto incrustado",
+        "html": "track",
+        "description": "El elmento HTML <track> es usado como hijo de los elementos multimedia, <audio> y <video>. Este te deja especificar pistas de texto temporizadas (o datos basados en el tiempo), por ejemplo para manejar automáticamente los subtítulos. Las pistas de texto usan el formato WebVTT (archivos .vtt) o de pistas de texto para la web.",
+        "category": "multimedia",
+        "validAttrs": [
+            {
+                "name": "default",
+                "description": "Este atributo indica que esta pista de texto debe estar activada salvo que las preferencias del usuario indiquen que otra pista de texto es más apropiada. Este atributo solo puede ser usado en un elemento track por cada elemento multimedia.",
+                "validOptions": []
+            },
+            {
+                "name": "kind",
+                "description": "Este atributo indica como esta pensada para usarse la pista de texto. Si lo omites el valor por defecto es subtitles",
+                "validOptions": [
+                    "subtitles",
+                    "captions",
+                    "descriptions",
+                    "chapters",
+                    "metadata"
+                ]
+            },
+            {
+                "name": "label",
+                "description": "Da un título a la pista de texto que puedan entender los usuarios y que es usado por el navegador cuando esta mostrando la lista de pistas de texto disponibles.",
+                "validOptions": []
+            },
+            {
+                "name": "src",
+                "description": "Señala la dirección de la pista de texto (archivo .vtt). Debe ser una URL valida. Este atributo debe ser especificado y su URL debe tener el mismo origen que el documento, salvo que el elemento <audio> o <video> que sea padre del elemento track tenga un atributo crossorigin.",
+                "validOptions": []
+            },
+            {
+                "name": "srclang",
+                "description": "Señala el idioma de los datos de la pista de texto. Debe ser una etiqueta de idioma BCP 47 valida. Si al atributo kind se le da el valor de subtitles, entonces srclang debe ser definido.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Video",
+        "html": "video",
+        "description": "El elemento video se utiliza para incrustar vídeos en un documento HTML o XHTML.",
+        "category": "multimedia",
+        "validAttrs": [
+            {
+                "name": "autoplay",
+                "description": "Un atributo booleano; si se especifica, el video comenzará a reproducirse automáticamente tan pronto como sea posible, sin detenerse para terminar de cargar los datos.",
+                "validOptions": []
+            },
+            {
+                "name": "autobuffer",
+                "description": "Un atributo booleano; si se especifica, el video comenzará automáticamente a almacenarse en el búfer, incluso si no está listo para reproducirse de forma automática. Esto se debe utilizar para los casos en los que se considera probable que el video se reproduzca (por ejemplo, si el usuario accedió a esa página específica para reproducir el video, no si hay un video insertado junto con otros contenidos). El video se almacena en el búfer hasta que el caché de medios esté lleno.",
+                "validOptions": []
+            },
+            {
+                "name": "buffered",
+                "description": "Un atributo que se puede leer para determinar qué intervalos de tiempo del multimedia se han almacenado en búfer. Este atributo contiene un objeto TimeRanges.",
+                "validOptions": []
+            },
+            {
+                "name": "controls",
+                "description": "Si está presente este atributo, Gecko ofrecerá controles para permitir que el usuario controle la reproducción de video, incluyendo volumen, búsqueda y pausar/reanudar reproducción.",
+                "validOptions": []
+            },
+            {
+                "name": "height",
+                "description": "La altura del área de visualización del vídeo en píxeles CSS.",
+                "validOptions": []
+            },
+            {
+                "name": "loop",
+                "description": "Un atributo booleano; si se especifica, al alcanzar el final del video, buscaremos automáticamente hasta el principio.",
+                "validOptions": []
+            },
+            {
+                "name": "preload",
+                "description": "El objetivo de este atributo enumerado es proporcionar una sugerencia al navegador sobre qué cree el autor que llevará a la mejor experiencia para el usuario.",
+                "validOptions": ["none", "metadatos", "auto"]
+            },
+            {
+                "name": "poster",
+                "description": "Una URL que indica un marco de póster para mostrar el resultado hasta que el usuario reproduzca o busque. Si este atributo no se especifica, no se muestra nada hasta que el primer cuadro está disponible, entonces se muestra el primer marco como el marco de póster.",
+                "validOptions": []
+            },
+            {
+                "name": "src",
+                "description": "La URL del vídeo que se va a insertar. Es opcional; podrás optar, en su lugar, por el elemento <source> dentro del bloque de vídeo para especificar el video que se va a incrustar.",
+                "validOptions": []
+            },
+            {
+                "name": "width",
+                "description": "La anchura del área de visualización del vídeo en píxeles CSS.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "URL base",
+        "html": "base",
+        "description": "El elemento HTML <base> especifica la dirección URL base que se utilizará para todas las direcciones URL relativas contenidas dentro de un documento. Sólo puede haber un elemento <base> en un documento.",
+        "category": "metadata",
+        "validAttrs": [
+            {
+                "name": "href",
+                "description": "La dirección URL base que se usa en todo el documento para las direcciones URL relativas. Si no se especifica este atributo, este elemento debe venir antes de cualesquiera otros elementos con atributos cuyos valores son direcciones URL. Se permiten las direcciones URL absolutas y relativas.",
+                "validOptions": []
+            },
+            {
+                "name": "target",
+                "description": "Un nombre o una palabra clave que indica la ubicación predeterminada para navegar por el resultado de hipervínculos o formas, para los elementos que no tienen una referencia explícita del objetivo . Es un nombre o una palabra clave para un contexto de navegación (por ejemplo: pestaña, ventana o marco en línea)",
+                "validOptions": ["_self", "_blank", "_parent", "_top"]
+            }
+        ]
+    },
+    {
+        "name": "Contenedor de metadata",
+        "html": "head",
+        "description": "El elemento HTML <head> provee información general (metadatos) acerca del documento, incluyendo su título y enlaces a scripts y hojas de estilos.",
+        "category": "metadata",
+        "validAttrs": [
+            {
+                "name": "profile",
+                "description": "Los URIs de uno o más perfiles de metadatos, separados por un espacio en blanco.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Enlace",
+        "html": "link",
+        "description": "El elemento HTML <link> especifica la relación entre el documento actual y un recurso externo. Los usos posibles de este elemento incluyen la definición de un marco relacional para navegación. Este elemento es más frecuentemente usado para enlazar hojas de estilos.",
+        "category": "metadata",
+        "validAttrs": [
+            {
+                "name": "charset",
+                "description": "Este atributo define la codificación de caracteres del recurso enlazado. El valor es un espacio y/o una lista de grupos de caracteres según se define en RFC 2045, separados por coma.",
+                "validOptions": []
+            },
+            {
+                "name": "crossorigin",
+                "description": "Este atributo enumerado indica si se debe usar CORS cuando se solicite una imagen relacionada.",
+                "validOptions": ["anonymous", "use-credentials"]
+            },
+            {
+                "name": "disabled",
+                "description": "Este atributo es usado para deshabilitar una relación de enlace. Agregando programación, este atributo puede ser usado para habilitar o deshabilitar la relación con distintas hojas de estilos.",
+                "validOptions": []
+            },
+            {
+                "name": "href",
+                "description": "Este atributo especifica la URL del recurso enlazado. La URL debe ser absoluta o relativa.",
+                "validOptions": []
+            },
+            {
+                "name": "hreflang",
+                "description": "Este atributo indica el idioma del recurso enlazado. Es meramente informativo. Los valores permitidos son determinados por la BCP47. Se recomienda usar este atributo solamente si el atributo href está presente.",
+                "validOptions": []
+            },
+            {
+                "name": "integrity",
+                "description": "Contiene metadatos en línea, el valor criptográfico codificado a base 64 de un recurso (archivo) que se le está indicando al navegador que obtenga, el cual puede ser utilizado por el agente usuario para verificar si el recurso obtenido ha sido entregado libre de manipulaciones inesperadas.",
+                "validOptions": []
+            },
+            {
+                "name": "media",
+                "description": "Este atributo especifica el tipo de medio al que aplica el recurso enlazado. Su valor debe ser un media query. Este atributo es usado principalmente cuando se enlaza a una hoja de esetilos externa en la que se le permita al agenete usuario seleccionar la que mejor se adapte al dispositivo sobre el que se ejecuta.",
+                "validOptions": []
+            },
+            {
+                "name": "methods",
+                "description": "El valor de este atributo provee información acerca de las funciones que podrían ser ejecutadas en un objeto.",
+                "validOptions": []
+            },
+            {
+                "name": "referrerpolicy",
+                "description": "Una cadena de texto que indica el referente a usar cuando se obtenga el recurso.",
+                "validOptions": [
+                    "no-referrer",
+                    "no-referrer-when-downgrade",
+                    "origin",
+                    "origin-when-cross-origin",
+                    "unsafe-url"
+                ]
+            },
+            {
+                "name": "rel",
+                "description": "Este atributo indica la relación del documento enlazado con el actual. El atributo debe ser una lista de tipos de enlaces separados por espacio.",
+                "validOptions": []
+            },
+            {
+                "name": "rev",
+                "description": "El valor de este atributo muestra la relación del documento actual al documento enlazado, como se define en el atributo href. En consecuencia, este atributo define la relación inversa, en comparación al valor del atributo rel. Los tipos de enlace para este atributo son similares a los disponibles para rel.",
+                "validOptions": []
+            },
+            {
+                "name": "sizes",
+                "description": "Este atributo define los tamaños de los íconos para medios visuales contenidos en el recurso. Debe estar presente solo si el atributo rel contiene el tipo de enlace icon.",
+                "validOptions": ["any"]
+            },
+            {
+                "name": "target",
+                "description": "Define el nombre del frame o ventana que tendrá la relación de enlace o que mostrará la representación de algun recurso enlazado.",
+                "validOptions": []
+            },
+            {
+                "name": "title",
+                "description": "El atributo title tiene semántica particular para el elemento <link>. Cuando se usa en una etiqueta <link rel=\"stylesheet\">, define una hoja de estilos preferida o alternativa. El uso incorrecto de este atributo podría provocar que la hoja de estilos sea ignorada.",
+                "validOptions": []
+            },
+            {
+                "name": "type",
+                "description": "Este atributo es usado para definir el tipo de contenido al que se enlaza. El valor del atributo debe ser un tipo MIME, como text/html, text/css. El uso común de este atributo es para definir el tipo de hoja de estilos enlazada, y el valor más común es text/css, el cual indica un formato de Hoja de Estilos en Cascada.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Metainformación",
+        "html": "meta",
+        "description": "Sirve para aportar información sobre el documento.",
+        "category": "metadata",
+        "validAttrs": [
+            {
+                "name": "name",
+                "description": "Nombre al que se asocia la metainformación",
+                "validOptions": []
+            },
+            {
+                "name": "content",
+                "description": "Los datos que se quieren asociar a name.",
+                "validOptions": []
+            },
+            {
+                "name": "http-equiv",
+                "description": "Aporta información sobre los encabezado de respuesta HTTP, puede usarse en lugar de name.",
+                "validOptions": []
+            },
+            {
+                "name": "scheme",
+                "description": "Indica un esquema de interpretación para los metadatos.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Estilo",
+        "html": "style",
+        "description": "Es el elemento encargado de indicar la información de estilo.",
+        "category": "metadata",
+        "validAttrs": [
+            {
+                "name": "type",
+                "description": "Indica el lenguaje de hojas de estilo usado.",
+                "validOptions": []
+            },
+            {
+                "name": "media",
+                "description": "Indica el/los medios a los que está destinada la información de estilo.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Aplicaciones externas",
+        "html": "embed",
+        "description": "Representa un punto de integración para una aplicación externa o de contenido interactivo (en otras palabras, un plug-in).",
+        "category": "embed-content",
+        "validAttrs": []
+    },
+    {
+        "name": "Marco en línea",
+        "html": "iframe",
+        "description": "Representa un contexto de navegación anidado, el cual permite incrustrar otra página HTML en la página actual.",
+        "category": "embed-content",
+        "validAttrs": [
+            {
+                "name": "target",
+                "description": "En el atributo target de los elementos <a>, <from> y <base>.",
+                "validOptions": []
+            },
+            {
+                "name": "formtarget",
+                "description": "En el atributo formtarget de los elementos <input> y <button>",
+                "validOptions": []
+            },
+            {
+                "name": "windowName",
+                "description": "En el parámetro windowName en el método window.open()",
+                "validOptions": []
+            },
+            {
+                "name": "allow",
+                "description": "Especifíca una política de características para el <iframe>.",
+                "validOptions": []
+            },
+            {
+                "name": "allow ",
+                "description": "Especifíca una política de características para el <iframe>.",
+                "validOptions": ["fullscreen", "payment"]
+            },
+            {
+                "name": "csp",
+                "description": "Una Politica de Seguridad del Contenido aplicada para el recurso incrustado.",
+                "validOptions": []
+            },
+            {
+                "name": "importance",
+                "description": "La prioridad de descarga en el recurso para el atributo src del <iframe>.",
+                "validOptions": ["auto", "high", "low"]
+            },
+            {
+                "name": "referrerpolicy",
+                "description": "Indica a qué referente enviar al obtener el recurso del marco.",
+                "validOptions": [
+                    "no-referrer",
+                    "no-referrer-when-downgrade",
+                    "origin",
+                    "origin-when-cross-origin",
+                    "same-origin",
+                    "strict-origin",
+                    "strict-origin-when-cross-origin",
+                    "unsafe-url"
+                ]
+            },
+            {
+                "name": "sandbox",
+                "description": "Aplica restricciones adicionales al contenido del marco.",
+                "validOptions": [
+                    "allow-forms",
+                    "allow-modals",
+                    "allow-orientation-lock",
+                    "allow-pointer-lock",
+                    "allow-popups",
+                    "allow-popups-to-escape-sandbox",
+                    "allow-presentation",
+                    "allow-same-origin",
+                    "allow-scripts",
+                    "allow-storage-access-by-user-activation",
+                    "allow-top-navigation",
+                    "allow-top-navigation-by-user-activation"
+                ]
+            },
+            {
+                "name": "seamless",
+                "description": "Este atributo booleano indica que el navegador debe representar el marco en línea de manera que parezca parte del documento que lo contiene",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "src",
+                "description": "La URL de la página para insertar.",
+                "validOptions": []
+            },
+            {
+                "name": "srcdoc",
+                "description": "El contenido de la página que debe contener el contexto incrustado.",
+                "validOptions": []
+            },
+            {
+                "name": "width",
+                "description": "Indica el ancho del marco HTML5 en píxeles CSS, o HTML 4.01 en píxeles o como porcentaje.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Contenido externo",
+        "html": "object",
+        "description": "Representa un recurso externo, que puede ser tratado como una imagen, un contexto de navegación anidado, o como un recurso que debe ser manejado por un plugin.",
+        "category": "embed-content",
+        "validAttrs": [
+            {
+                "name": "data",
+                "description": "La dirección de la fuente, escrita como una URL válida. Al menos uno de los dos atributos, data o type, deben estar definidos.",
+                "validOptions": []
+            },
+            {
+                "name": "form",
+                "description": "El elemento form, si es que hay alguno, al que el objeto está asociado (su form propietario).",
+                "validOptions": []
+            },
+            {
+                "name": "height",
+                "description": "La altura del recurso mostrado, en CSS pixels. -- (Valores absolutos unicamente. NO percentages)",
+                "validOptions": []
+            },
+            {
+                "name": "name",
+                "description": "El nombre de un contexto de navegación válido (HTML5), o el nombre del control (HTML4).",
+                "validOptions": []
+            },
+            {
+                "name": "type",
+                "description": "El content type  del recurso especificado mediante data. Al menos uno de los dos atributos, data o type, deben estar definidos.",
+                "validOptions": []
+            },
+            {
+                "name": "typemustmatch",
+                "description": "Este valor booleano indica si el atributo type y el content type real del recurso deben coincidir para porder ser usados.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "usemap",
+                "description": "Una refercia hash-name a un elemento <map>; es decir un '#' seguido del valor de un name de un elemento map",
+                "validOptions": []
+            },
+            {
+                "name": "width",
+                "description": "El ancho del recurso mostrado, en  CSS pixels. -- (Valores absolutos unicamente. NO percentages)",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Parámetros de ejecución",
+        "html": "param",
+        "description": "Permite especificar parámetros de ejecución para un objeto.",
+        "category": "embed-content",
+        "validAttrs": [
+            {
+                "name": "name",
+                "description": "Referencia un nombre de parámetro de ejecución conocido por el objeto insertado.",
+                "validOptions": []
+            },
+            {
+                "name": "value",
+                "description": "Especifica un valor para el parámetro referenciado por name",
+                "validOptions": []
+            },
+            {
+                "name": "valuetype",
+                "description": "Especifica el tipo de atributo value.",
+                "validOptions": ["data", "ref", "object"]
+            },
+            {
+                "name": "type",
+                "description": "Tipo MIME del recurso referenciado.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Contenedor",
+        "html": "picture",
+        "description": "Es un contenedor usado para especificar múltiples elementos <source> y un elemento <img> contenido en él para proveer versiones de una imagen para diferentes escenarios de dispositivos.",
+        "category": "embed-content",
+        "validAttrs": []
+    },
+    {
+        "name": "Versiones de un archivo",
+        "html": "source",
+        "description": "Especifica recursos de medios múltiples para los elementos <picture>, <audio>, o <video>.",
+        "category": "embed-content",
+        "validAttrs": [
+            {
+                "name": "sizes",
+                "description": "Es una lista de tamaños del origen que describe el ancho renderizado final de la imagen representada por el origen.",
+                "validOptions": []
+            },
+            {
+                "name": "src",
+                "description": "Es la ubicación del recurso multimedia, requerido por los elementos <audio> y <video>.",
+                "validOptions": []
+            },
+            {
+                "name": "srcset",
+                "description": "Una lista de una o más cadenas separadas por comas que indican un conjunto de posibles imágenes representadas por la fuente para que las utilice el navegador.",
+                "validOptions": []
+            },
+            {
+                "name": "type",
+                "description": "El tipo MIME del recurso, opcionalmente con un parámetro codecs. Consultar RFC 4281 para obtener información sobre cómo especificar los códecs.",
+                "validOptions": []
+            },
+            {
+                "name": "media",
+                "description": "Consulta multimedia de los medios destinados al recurso; esto solo debe usarse en un elemento <picture>.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Caption",
+        "html": "caption",
+        "description": "Es el encargado de darle un título descriptivo a las tablas.",
+        "category": "tables",
+        "validAttrs": []
+    },
+    {
+        "name": "Columna",
+        "html": "col",
+        "description": "Permite especificar propiedades para una columna o un grupo de ellas.",
+        "category": "tables",
+        "validAttrs": [
+            {
+                "name": "span",
+                "description": "Indica el número de columnas afectadas.",
+                "validOptions": []
+            },
+            {
+                "name": "width",
+                "description": "Indica la anchura de las columnas.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Grupo de columnas",
+        "html": "colgroup",
+        "description": "Grupo de columnas. Permite crear grupos de columnas.",
+        "category": "tables",
+        "validAttrs": [
+            {
+                "name": "span",
+                "description": "Indica el número de columnas afectadas.",
+                "validOptions": []
+            },
+            {
+                "name": "width",
+                "description": "Indica la anchura de las columnas.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Tabla",
+        "html": "table",
+        "description": "Representa datos en dos o mas dimensiones.",
+        "category": "tables",
+        "validAttrs": [
+            {
+                "name": "border",
+                "description": "Este atributo entero define el tamaño del cuadro alrededor de la tabla ",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Celda de tabla",
+        "html": "td",
+        "description": "Define la celda de una tabla que contiene datos.",
+        "category": "tables",
+        "validAttrs": [
+            {
+                "name": "bgcolor",
+                "description": "define el color de fondo de cada celda de la columna. Es uno de los códigos de 6 dígitos hexadecimales como se definen en sRGB , prefijado por un '# ' . Una de las cadenas de color predefinidos se pueden utilizar",
+                "validOptions": []
+            },
+            {
+                "name": "colspan",
+                "description": "Contiene un valor entero no negativo que indica el número de columnas por las que se extiende la celda.",
+                "validOptions": []
+            },
+            {
+                "name": "rowspan",
+                "description": "Contiene un valor entero no negativo que indica el número de fila por las que se extiende la celda.",
+                "validOptions": []
+            },
+            {
+                "name": "headers",
+                "description": "Este atributo contiene una lista de cadenas separadas por espacios , cada uno correspondiente al atributo ID de la { { HTMLElement ( th ) } } elementos que se aplican a este elemento.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Encabezado de tabla",
+        "html": "th",
+        "description": "Define una celda como encabezado de un grupo de celdas en una tabla.",
+        "category": "tables",
+        "validAttrs": [
+            {
+                "name": "bgcolor",
+                "description": "define el color de fondo de cada celda de la columna. Es uno de los códigos de 6 dígitos hexadecimales como se definen en sRGB , prefijado por un '# ' . Una de las cadenas de color predefinidos se pueden utilizar",
+                "validOptions": []
+            },
+            {
+                "name": "colspan",
+                "description": "Contiene un valor entero no negativo que indica el número de columnas por las que se extiende la celda.",
+                "validOptions": []
+            },
+            {
+                "name": "rowspan",
+                "description": "Contiene un valor entero no negativo que indica el número de fila por las que se extiende la celda.",
+                "validOptions": []
+            },
+            {
+                "name": "headers",
+                "description": "Este atributo contiene una lista de cadenas separadas por espacios , cada uno correspondiente al atributo ID de la { { HTMLElement ( th ) } } elementos que se aplican a este elemento.",
+                "validOptions": []
+            },
+            {
+                "name": "scope",
+                "description": "Este atributo enumerado define las celdas con las que se relaciona el elemento de encabezado (definido en el <th>).",
+                "validOptions": ["row", "col", "rowgroup", "colgroup", "auto"]
+            }
+        ]
+    },
+    {
+        "name": "Fila de tabla",
+        "html": "tr",
+        "description": "Define una fila de celdas en una tabla.",
+        "category": "tables",
+        "validAttrs": []
+    },
+    {
+        "name": "Cabecera de tabla",
+        "html": "thead",
+        "description": "Define semánticamente un contenedor para los encabezados de la tabla.",
+        "category": "tables",
+        "validAttrs": []
+    },
+    {
+        "name": "Cuerpo de tabla",
+        "html": "tbody",
+        "description": "Define semánticamente un contenedor para el cuerpo de la tabla.",
+        "category": "tables",
+        "validAttrs": []
+    },
+    {
+        "name": "Pie de tabla",
+        "html": "tfoot",
+        "description": "Define semánticamente un contenedor para el pie de la tabla.",
+        "category": "tables",
+        "validAttrs": []
+    },
+    {
+        "name": "Botón",
+        "html": "button",
+        "description": "Es el elemento crea botones marcadores.",
+        "category": "forms",
+        "validAttrs": [
+            {
+                "name": "name",
+                "description": "Asigna un nombre de control.",
+                "validOptions": []
+            },
+            {
+                "name": "value",
+                "description": "Asigna un valor inicial que será enviado con el formulario.",
+                "validOptions": []
+            },
+            {
+                "name": "type",
+                "description": "Indica el tipo de botón.",
+                "validOptions": ["button", "submit", "reset"]
+            },
+            {
+                "name": "disabled",
+                "description": "Indica que el control está desabilitado.",
+                "validOptions": ["true", "false"]
+            }
+        ]
+    },
+    {
+        "name": "Lista de datos",
+        "html": "datalist",
+        "description": "Contiene un conjunto de elementos <option> que representan los valores disponibles para otros controles.",
+        "category": "forms",
+        "validAttrs": []
+    },
+    {
+        "name": "Grupo de campos",
+        "html": "fieldset",
+        "description": "Permite organizar en grupos los campos de un formulario..",
+        "category": "forms",
+        "validAttrs": []
+    },
+    {
+        "name": "Formulario",
+        "html": "form",
+        "description": "Representa una sección de un documento que contiene controles interactivos que permiten a un usuario enviar información a un servidor web",
+        "category": "forms",
+        "validAttrs": [
+            {
+                "name": "accept-charset",
+                "description": "Una lista de codificación de caracteres que el servidor acepta. La lista puede ser delimitada por espacios o comas.",
+                "validOptions": []
+            },
+            {
+                "name": "action",
+                "description": "La URI de un programa que procesa la información enviada por medio del formulario. ",
+                "validOptions": []
+            },
+            {
+                "name": "autocomplete",
+                "description": "Indica cuales de los controles en este formulario puede tener sus valores automáticamente completados por el navegador.",
+                "validOptions": ["off", "on"]
+            },
+            {
+                "name": "enctype",
+                "description": "Cuando el valor del atributo method es post, este atributo es el  tipo MIME del contenido que es usado para enviar el formulario al servidor.",
+                "validOptions": [
+                    "application/x-www-form-urlencoded",
+                    "multipart/form-data",
+                    "text/plain"
+                ]
+            },
+            {
+                "name": "method",
+                "description": "El método HTTP que el navegador usa para enviar el formulario.",
+                "validOptions": ["post", "get"]
+            },
+            {
+                "name": "name",
+                "description": "Define el nombre del formulario",
+                "validOptions": []
+            },
+            {
+                "name": "novalidate",
+                "description": "Este atributo booleano indica que el formulario no es validado cuando es enviado.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "target",
+                "description": "Un nombre o keyword indicando donde mostrar la respuesta que es recibida después de enviar el formulario.",
+                "validOptions": ["_self", "_blank", "_parent", "_top"]
+            }
+        ]
+    },
+    {
+        "name": "Etiqueta",
+        "html": "label",
+        "description": "Representa una etiqueta para un elemento en una interfaz de usuario.",
+        "category": "forms",
+        "validAttrs": [
+            {
+                "name": "for",
+                "description": "El ID del elemento de formulario etiquetable relacionado en el mismo documento que el elemento label. ",
+                "validOptions": []
+            },
+            {
+                "name": "form",
+                "description": "El formulario con el cual el label está asociado (su formulario dueño). El valor de este atributo debe ser un ID del elemento <form> en el mismo documento. Si este atributo no es especificado, este elemento <label> deberia ser descendiente de un elemento <form>.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Entrada de usuario",
+        "html": "input",
+        "description": "El elemento HTML <input> se usa para crear controles interactivos para formularios basados en la web con el fin de recibir datos del usuario.",
+        "category": "forms",
+        "validAttrs": [
+            {
+                "name": "type",
+                "description": "El tipo de control a mostrar. Su valor predeterminado es text, si no se especifica este atributo.",
+                "validOptions": [
+                    "button",
+                    "checkbox",
+                    "color",
+                    "date",
+                    "datetime",
+                    "datetime-local",
+                    "email",
+                    "file",
+                    "hidden",
+                    "image",
+                    "month",
+                    "number",
+                    "password",
+                    "radio",
+                    "range",
+                    "reset",
+                    "search",
+                    "submit",
+                    "tel",
+                    "text",
+                    "time",
+                    "url",
+                    "week"
+                ]
+            },
+            {
+                "name": "accept",
+                "description": "Si el valor del atributo type es file, este atributo indica los tipos de archivo que el servidor acepta, de otra manera será ignorado. El valor debe ser una lista de tipos de contenido únicos, separados por coma.",
+                "validOptions": []
+            },
+            {
+                "name": "autocomplete",
+                "description": "Este atributo indica si el valor del control puede ser completado automáticamente por el navegador.",
+                "validOptions": [
+                    "off",
+                    "on",
+                    "name",
+                    "honorific-prefix",
+                    "given-name",
+                    "family-name",
+                    "honorific-suffix",
+                    "nickname",
+                    "email",
+                    "username",
+                    "new-password",
+                    "current-password",
+                    "organization-title",
+                    "organization",
+                    "street-address",
+                    "address-line1",
+                    "address-line2",
+                    "address-line3",
+                    "address-level4",
+                    "address-level3",
+                    "address-level2",
+                    "address-level1",
+                    "country",
+                    "country-name",
+                    "postal-code",
+                    "cc-name",
+                    "cc-given-name",
+                    "cc-additional-name",
+                    "cc-family-name",
+                    "cc-number",
+                    "cc-exp",
+                    "cc-exp-month",
+                    "cc-exp-year",
+                    "cc-csc",
+                    "cc-type",
+                    "transaction-currency",
+                    "transaction-amount",
+                    "language",
+                    "bday",
+                    "bday-day",
+                    "bday-month",
+                    "bday-year",
+                    "sex",
+                    "tel",
+                    "url",
+                    "photo"
+                ]
+            },
+            {
+                "name": "autofocus",
+                "description": "Este atributo Booleano permite especificar que un control de formulario tenga el cursor cuando la página se carga, a menos que el usuario lo reemplace, por ejemplo, escribiendo en un control diferente.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "capture",
+                "description": "Cuando el valor del atributo type es file, la presencia de este atributo Booleano indica que se le dará preferencia a la captura del medio directamente del ambiente del dispositivo, usando algún mecanismo de captura de medios.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "checked",
+                "description": "Cuando el valor del atributo type es radio o checkbox, la presencia de este atributo Booleano indica que el control está seleccionado de forma predeterminada. ",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "disabled",
+                "description": "Este atributo Booleano indica que el control no está disponible para interacción. En particular, el evento click no será invocado en controles deshabilitados.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "form",
+                "description": "El elemento form al que está asociado el elemento (su formulario propietario). El valor del atributo debe ser el id de un elemento <form> en el mismo documento. Si el atributo no es especificado, este elemento <input> deberá ser descendiente de un elemento <form>.",
+                "validOptions": []
+            },
+            {
+                "name": "formaction",
+                "description": "El URI de un programa que procesa la información enviada por el elemento input, cuando es un botón de tipo submit o image.",
+                "validOptions": []
+            },
+            {
+                "name": "formenctype",
+                "description": "Si el elemento es de tipo submit o image, este atributo especifica el tipo de contenido que es usado para enviar el formulario al servidor.",
+                "validOptions": [
+                    "application/x-www-form-urlencoded",
+                    "multipart/form-data",
+                    "text/plain"
+                ]
+            },
+            {
+                "name": "formmethod",
+                "description": "Si el elemento input es un botón de tipo submit o image, este atributo especifica el método HTTP que el navegador usará para enviar el formulario. ",
+                "validOptions": ["get", "post"]
+            },
+            {
+                "name": "formnovalidate",
+                "description": "Si el elemento input es de tipo submit o image, este atributo Booleano especifica que el formulario no será validado cuando se envíe. ",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "formtarget",
+                "description": "Si el elemento input es de tipo submit o image, este atributo es el nombre o palabra clave que indica dónde mostrar la respuesta que se recibe después de enviar el formulario.",
+                "validOptions": ["_self", "_blank", "_parent", "_top"]
+            },
+            {
+                "name": "height",
+                "description": "Si el valor del atributo type es image, este atributo define la altura de la imagen mostrada para el botón.",
+                "validOptions": []
+            },
+            {
+                "name": "inputmode",
+                "description": "Una pista para el navegador sobre qué teclado mostrar. Este atributo aplica cuando el valor del atributo type es text, password, email, o url.",
+                "validOptions": [
+                    "verbatim",
+                    "latin-name",
+                    "latin-prose",
+                    "full-width-latin",
+                    "kana",
+                    "katakana",
+                    "numeric",
+                    "tel",
+                    "email",
+                    "url"
+                ]
+            },
+            {
+                "name": "list",
+                "description": "Identifica una lista de opciones predefinidas como sugerencias al usuario. El valor debe ser el id de un elemento <datalist> en el mismo documento.",
+                "validOptions": []
+            },
+            {
+                "name": "max",
+                "description": "El valor máximo (numérico o fecha-hora) para este elemento.",
+                "validOptions": []
+            },
+            {
+                "name": "maxlength",
+                "description": "Si el valor del atributo type es text, email, search, password, tel, o url, este atributo especifica el número máximo de caracteres (en puntos de código Unicode) que el usuario puede introducir.",
+                "validOptions": []
+            },
+            {
+                "name": "min",
+                "description": "El valor mínimo (numérico o fecha-hora) para este elemento.",
+                "validOptions": []
+            },
+            {
+                "name": "minlength",
+                "description": "Si el valor del atributo type es text, email, search, password, tel, o url, este atributo especifica la longitud mínima de caracteres (en puntos de código Unicode) que el usuario puede introducir.",
+                "validOptions": []
+            },
+            {
+                "name": "multiple",
+                "description": "Indica si el usuario puede introducir más de un valor. Este atributo aplica cuando el atributo type es email o file.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "name",
+                "description": "El nombre del control, el cual es enviado con los datos del formulario.",
+                "validOptions": []
+            },
+            {
+                "name": "pattern",
+                "description": "Una expresión regular contra la que el valor es evaluado. El patrón debe coincidir con el valor completo, no solo una parte.",
+                "validOptions": []
+            },
+            {
+                "name": "placeholder",
+                "description": "Una pista para el usuario sobre lo que puede introducir en el control. El texto no debe contener saltos de línea.",
+                "validOptions": []
+            },
+            {
+                "name": "readonly",
+                "description": "Este atributo indica que el usuario no puede modificar el valor del control. El valor del atributo es irrelevante.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "required",
+                "description": "Este atributo especifica que el usuario debe llenar el control antes de enviarlo al formulario.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "value",
+                "description": "El valor inicial del control. Este atributo es opcional, excepto cuando el atributo type es radio o checkbox.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Leyenda",
+        "html": "legend",
+        "description": "Crea un título para un grupos los campos <fieldset> de un formulario.",
+        "category": "forms",
+        "validAttrs": []
+    },
+    {
+        "name": "Opcion",
+        "html": "option",
+        "description": "Se usa para representar un item dentro de un <select>, un  <optgroup> o un  elemento HTML5 <datalist>.",
+        "category": "forms",
+        "validAttrs": [
+            {
+                "name": "disabled",
+                "description": "Si está establecido el elemento no se puede seleccionar.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "label",
+                "description": "Este atributo es el texto para la etiqueta que determina el significado de la opción.",
+                "validOptions": []
+            },
+            {
+                "name": "selected",
+                "description": "Si está presente, este atributo booleano indica si esta opción es la inicialmente seleccionada.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "value",
+                "description": "El contenido de este atributo representa el valor que será enviado al enviar el formulario si una determinada opción está seleccionada.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Progress",
+        "html": "progress",
+        "description": "Se utiliza para visualizar el progreso de una tarea. Aunque los detalles de como se muestran depende directamente del navegador que utiliza el cliente, aunque básicamente aparece una barra de progreso.",
+        "category": "forms",
+        "validAttrs": [
+            {
+                "name": "value",
+                "description": "Este atributo indica que parte de la tarea ya se ha completado o cargado. Debe especificarse un valor entre 0  y max, o entre 0 y 1.0 si max está omitido.",
+                "validOptions": []
+            },
+            {
+                "name": "max",
+                "description": "Este atributo indica la cantidad de trabajo que demorá la carga, se define en el elemento progress.",
+                "validOptions": []
+            }
+        ]
+    },
+    {
+        "name": "Select",
+        "html": "select",
+        "description": "Representa un control que muestra un menú de opciones. Las opciones contenidas en el menú son representadas por elementos <option>, los cuales pueden ser agrupados por elementos <optgroup>. La opcion puede estar preseleccionada por el usuario.",
+        "category": "forms",
+        "validAttrs": [
+            {
+                "name": "autofocus",
+                "description": "Este atributo permite especificar un formulario de control que debería tener enfoque de entrada cuando se carga la página, a no ser que el usuario lo sobreescriba, por ejemplo, escribiendo un control diferente.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "disabled",
+                "description": "El atributo booleano especifica que el usuario no puede interactuar con el control.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "form",
+                "description": "El elemento formulario al cual el select está asociado (su propietario del formulario)",
+                "validOptions": []
+            },
+            {
+                "name": "multiple",
+                "description": "Este elemento booleano indica que se pueden seleccionar múltiples opciones de la lista.",
+                "validOptions": []
+            },
+            {
+                "name": "name",
+                "description": "El nombre del elemento de control.",
+                "validOptions": []
+            },
+            {
+                "name": "required",
+                "description": "Es un elemento boooleano que indica si la opcion puede quedar sin seleccionar o si es requerida.",
+                "validOptions": ["true", "false"]
+            }
+        ]
+    },
+    {
+        "name": "Text Area",
+        "html": "textarea",
+        "description": "Representa un control para la edición mutilínea de texto sin formato.",
+        "category": "forms",
+        "validAttrs": [
+            {
+                "name": "autocomplete",
+                "description": "Este atributo indica si el valor del control puede ser completado automáticamente por el navegador.",
+                "validOptions": ["on", "off"]
+            },
+            {
+                "name": "autofocus",
+                "description": "Este atributo booleano te permite especificar que un control de un formulario adquiera el foco cuando se carga la página.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "cols",
+                "description": "La anchura visible del control de texto, en caracteres de anchura media. Si está definido debe ser positivo. Si no, por defecto, el valor es 20",
+                "validOptions": []
+            },
+            {
+                "name": "disabled",
+                "description": "Este atributo booleano indica que el usuario no puede interactuar con el control. ",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "name",
+                "description": "El nombre del control",
+                "validOptions": []
+            },
+            {
+                "name": "placeholder",
+                "description": "Se puede añadir un indicación para el usuario que defina que se debe insertar en el control.",
+                "validOptions": []
+            },
+            {
+                "name": "readonly",
+                "description": "Este atributo booleano indica que el usuario no puede modificar el valor del control.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "required",
+                "description": "Este atributo indica que el usuario debe rellenar el contro con un valor antes de poder enviar el formulario.",
+                "validOptions": ["true", "false"]
+            },
+            {
+                "name": "rows",
+                "description": "El número de líneas visibles en el control",
+                "validOptions": []
+            },
+            {
+                "name": "wrap",
+                "description": "Indica como el control envuelve al texto.",
+                "validOptions": ["hard", "soft"]
+            }
+        ]
+    },
+    {
+        "name": "Elemento de información",
+        "html": "address",
+        "description": "Aporta información de contacto para su <article> más cercano o ancestro <body>; en el último caso lo aplica a todo el documento.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Contenido dinámico",
+        "html": "article",
+        "description": "Representa una composición auto-contenida en un documento, página, una aplicación o en el sitio, que se destina a distribuir de forma independiente o reutilizable, por ejemplo, en la indicación.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Sección de una página",
+        "html": "aside",
+        "description": "Estas secciones son a menudo representadas como barras laterales o como inserciones y contienen una explicación al margen como una definición de glosario, elementos relacionados indirectamente, como publicidad, la biografía del autor, o en aplicaciones web, la información de perfil o enlaces a blogs relacionados.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Pie de página",
+        "html": "footer",
+        "description": "Representa un pie de página para el contenido de sección más cercano o el elemento  raíz de sección (p.e, su ancestro mas cercano <article>, <aside>, <nav>, <section>,<blockquote>, <body>, <details>, <fieldset>, <figure>, <td>).",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Encabezado de página",
+        "html": "header",
+        "description": "Representa un grupo de ayudas introductorias o de navegación. Puede contener algunos elementos de encabezado, así como también un logo, un formulario de búsqueda, un nombre de autor y otros componentes.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Contenido textual o estático.",
+        "html": "h1",
+        "description": "Implementan seis niveles de encabezado del documento, <h1> es el más importante, y <h6>, el menos importante. Un elemento de encabezado describe brevemente el tema de la sección que presenta.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Contenido textual o estático.",
+        "html": "h2",
+        "description": "Implementan seis niveles de encabezado del documento, <h1> es el más importante, y <h6>, el menos importante. Un elemento de encabezado describe brevemente el tema de la sección que presenta.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Contenido textual o estático.",
+        "html": "h3",
+        "description": "Implementan seis niveles de encabezado del documento, <h1> es el más importante, y <h6>, el menos importante. Un elemento de encabezado describe brevemente el tema de la sección que presenta.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Contenido textual o estático.",
+        "html": "h4",
+        "description": "Implementan seis niveles de encabezado del documento, <h1> es el más importante, y <h6>, el menos importante. Un elemento de encabezado describe brevemente el tema de la sección que presenta.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Contenido textual o estático.",
+        "html": "h5",
+        "description": "Implementan seis niveles de encabezado del documento, <h1> es el más importante, y <h6>, el menos importante. Un elemento de encabezado describe brevemente el tema de la sección que presenta.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Contenido textual o estático.",
+        "html": "h6",
+        "description": "Implementan seis niveles de encabezado del documento, <h1> es el más importante, y <h6>, el menos importante. Un elemento de encabezado describe brevemente el tema de la sección que presenta.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Encabezado de una sección",
+        "html": "hgroup",
+        "description": "Representa el encabezado de una sección. Define un solo título que participa de la estructura del documento como el encabezado de la sección implícita o explícita a la que pertenece.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Enlaces de navegación",
+        "html": "nav",
+        "description": "Representa una sección de una página cuyo propósito es proporcionar enlaces de navegación, ya sea dentro del documento actual o a otros documentos. Ejemplos comunes de secciones de navegación son menús, tablas de contenido e índices.",
+        "category": "content-sections",
+        "validAttrs": []
+    },
+    {
+        "name": "Sección genérica",
+        "html": "section",
+        "description": "Representa una sección genérica de un documento. Sirve para determinar qué contenido corresponde a qué parte de un esquema.",
+        "category": "content-sections",
+        "validAttrs": []
     }
 ]
