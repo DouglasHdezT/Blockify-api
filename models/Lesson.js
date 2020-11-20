@@ -7,6 +7,10 @@ contentSchema.add({
     id: String,
     html: String,
     text: String,
+    attr: [{
+        name: String,
+        value: String
+    }],
     children: [contentSchema]
 });
 
