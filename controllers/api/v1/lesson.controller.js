@@ -1,5 +1,6 @@
 const lessonService = require("@internal/services-v1/lesson.service");
 const userService = require("@internal/services-v1/user.service");
+const commentService = require("@internal/services-v1/comment.service");
 
 const controller = {};
 
@@ -198,12 +199,12 @@ controller.getComments = async (req, res, next) => {
     try {
         const { id } = req.params;
 
-        const { status: userExists, content: user } = await userService.findOneById(id);
-        if (!userExists) return res.status(404).json({ error: "User not found" });
+        const { status: lessonExists, content: lesson } = await lessonService.findById(id);
+        if (!lessonExists) return res.status(404).json({ error: "User not found" });
 
         return res.status(200).json({
-            username: user.username,
-            comments: user.comments
+            lesson: lesson.title,
+            comments: lesson.comments
         });
     } catch (error) {
         next(error);
@@ -213,17 +214,17 @@ controller.getComments = async (req, res, next) => {
 controller.addComment = async (req, res, next) => {
     try {
         const { _id: myUserID } = req.user;
-        const { userID } = req.body;
+        const { lessonID } = req.body;
 
-        const { status: userExists, content: user } = await userService.findOneById(userID);
-        if (!userExists) return res.status(404).json({ error: "User not found" });
+        const { status: lessonExists, content: lesson } = await lessonService.findById(lessonID);
+        if (!lessonExists) return res.status(404).json({ error: "Lesson not found" });
 
         const { status: commentCreated, content: comment }
             = await commentService.create(req.body, myUserID);
 
         if (!commentCreated) return res.status(409).json({ error: "Comment not created" });
 
-        const { status: commentAdded } = await userService.addComment(user, comment);
+        const { status: commentAdded } = await lessonService.addComment(lesson, comment);
         if (!commentAdded) return res.status(409).json({ error: "Comment not added" });
 
         return res.status(200).json({ message: "Comment added" });
@@ -234,13 +235,13 @@ controller.addComment = async (req, res, next) => {
 
 controller.removeComment = async (req, res, next) => {
     try {
-        const { commentID, userID } = req.body;
+        const { commentID, lessonID } = req.body;
         const { _id: myUserID } = req.user;
 
-        const { status: userExists, content: user }
-            = await userService.findOneById(userID);
+        const { status: lessonExists, content: lesson }
+            = await lessonService.findById(lessonID);
 
-        if (!userExists) return res.status(404).json({ error: "User not found" });
+        if (!lessonExists) return res.status(404).json({ error: "Lesson not found" });
 
         const { status: commentExists, content: comment }
             = await commentService.findOneByID(commentID);
@@ -250,7 +251,7 @@ controller.removeComment = async (req, res, next) => {
         if (!comment.creator.equals(myUserID))
             return res.status(403).json({ error: "This comment doesn't belong to you" });
 
-        const { status: commentRemoved } = await userService.removeComment(user, comment);
+        const { status: commentRemoved } = await lessonService.removeComment(lesson, comment);
         if (!commentRemoved) return res.status(409).json({ error: "Comment not removed" });
 
         const { status: commentDeleted } = await commentService.delete(comment);

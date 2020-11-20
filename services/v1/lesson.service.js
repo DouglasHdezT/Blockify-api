@@ -33,7 +33,14 @@ service.findAll = async () => {
             await Lesson.find({}).populate({
                 path: "creator",
                 select: "username _id avatar",
-            }).populate("comments") || [];
+            }).populate({
+                path: "comments",
+                populate: {
+                    path: "creator",
+                    model: "User",
+                    select: "username avatar"
+                }
+            }) || [];
         
         return new ServiceResponse(true, lessons);
     } catch (error) {
@@ -44,7 +51,14 @@ service.findAll = async () => {
 service.findAllByUser = async (userID) => { 
     try {
         const lessons =
-            await Lesson.find({ creator: userID }).populate("creator", "username _id avatar").populate("comments") || [];
+            await Lesson.find({ creator: userID }).populate("creator", "username _id avatar").populate({
+                path: "comments",
+                populate: {
+                    path: "creator",
+                    model: "User",
+                    select: "username avatar"
+                }
+            }) || [];
 
         return new ServiceResponse(true, lessons);
     } catch (error) {
@@ -60,6 +74,7 @@ service.findById = async (id) => {
                 path: "comments",
                 populate: {
                     path: "creator",
+                    model: "User",
                     select: "username avatar"
                 }
             });
