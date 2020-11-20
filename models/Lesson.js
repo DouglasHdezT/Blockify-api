@@ -72,7 +72,11 @@ const LessonSchema = new Schema({
         enum: [0, 1, 2],
         default: 0
     },
-    learningPath: [String]
+    learningPath: [String],
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: "Comment"
+    }]
 }, {
     timestamps: true,
 });

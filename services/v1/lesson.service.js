@@ -33,7 +33,7 @@ service.findAll = async () => {
             await Lesson.find({}).populate({
                 path: "creator",
                 select: "username _id avatar",
-            }) || [];
+            }).populate("comments") || [];
         
         return new ServiceResponse(true, lessons);
     } catch (error) {
@@ -44,7 +44,7 @@ service.findAll = async () => {
 service.findAllByUser = async (userID) => { 
     try {
         const lessons =
-            await Lesson.find({ creator: userID }).populate("creator", "username _id avatar") || [];
+            await Lesson.find({ creator: userID }).populate("creator", "username _id avatar").populate("comments") || [];
 
         return new ServiceResponse(true, lessons);
     } catch (error) {
@@ -55,7 +55,8 @@ service.findAllByUser = async (userID) => {
 service.findById = async (id) => { 
     try {
         const lesson = await Lesson.findById(id)
-            .populate("creator", "username _id avatar");
+            .populate("creator", "username _id avatar")
+            .populate("comments");
         if (!lesson) return new ServiceResponse(false, { error: "Lesson not found" });
 
         return new ServiceResponse(true, lesson);
@@ -146,4 +147,33 @@ service.updateStar = async (lesson, userID, rate) => {
         throw error;
     }
 }
+
+/**
+ * Comments methods
+ */
+
+service.addComment = async (lesson, comment) => {
+    try {
+        lesson.comments = [...lesson.comments, comment._id];
+        const lessonSaved = await lesson.save();
+
+        if (!lessonSaved) return new ServiceResponse(false, { error: "Cannot add comment" });
+        return new ServiceResponse(true, { message: "Comment added" });
+    } catch (error) {
+        throw error;
+    }
+}
+
+service.removeComment = async (lesson, comment) => {
+    try {
+        lesson.comments = lesson.comments.filter(commentA => !commentA._id.equals(comment._id));
+        const lessonSaved = await lesson.save();
+
+        if (!lessonSaved) return new ServiceResponse(false, { error: "Cannot remove comment" });
+        return new ServiceResponse(true, { message: "Comment deleted" });
+    } catch (error) {
+        throw error;
+    }
+}
+
 module.exports = service;

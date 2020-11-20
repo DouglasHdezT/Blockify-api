@@ -35,19 +35,21 @@ controller.addTakenLesson = async (req, res, next) => {
         const { status: exist } = await lessonService.findById(lessonId);
         if (!exist) { return res.status(409).json({ error: "No existe la leccion" }) }
 
-        const user = await userService.findOneById(req.user_id);
-        if (!user) {
+        const { status: userExists, content: user } = await userService.findOneById(req.user_id);
+        if (!userExists) {
             return res.status(409).json({ error: "No se pudo agregar" });
         }
 
-        if (!user.content.lessonsTaken.includes(lessonId)) {
+        if (!user.lessonsTaken || !user.lessonsTaken.includes(lessonId)) {
 
             const { status: added } = await userService.addTakenLesson(req.user._id, lessonId);
 
             if (!added) return res.status(409).json({ error: "No se pudo agregar" });
+            return res.status(201).json({ message: "Added!" });
+        } else { 
+            return res.status(409).json({ message: "Already in array" });
         }
 
-        return res.status(201).json({ message: "Added!" });
     } catch (error) {
         next(error);
     }
