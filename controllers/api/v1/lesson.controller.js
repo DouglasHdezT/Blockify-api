@@ -38,7 +38,7 @@ controller.findById = async (req, res, next) => {
 
         let started = false;
 
-        if (user.lessonsTaken && user.lessonsTaken.includes(lessonId)) {
+        if (user.lessonsTaken && user.lessonsTaken.includes(lesson._id)) {
             started = true;
         }
 
