@@ -32,7 +32,7 @@ controller.findAll = async (req, res, next) => {
 controller.findById = async (req, res, next) => {
     try {
         const { id } = req.params;
-        const { user } = req.user;
+        const user = req.user;
 
         const {status: lessonExists, content: lesson } = await lessonService.findById(id);
 
