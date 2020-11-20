@@ -75,7 +75,7 @@ service.addTakenLesson = async (userId, lessonId) => {
     }
 }
 
-service.getTakenLessons = (id) => {
+service.getTakenLessons = async (id) => {
     try {
         const user = await User.findById(id).populate('lessonsTaken');
 
