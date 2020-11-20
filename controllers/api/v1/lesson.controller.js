@@ -32,11 +32,19 @@ controller.findAll = async (req, res, next) => {
 controller.findById = async (req, res, next) => {
     try {
         const { id } = req.params;
+        const { user } = req.user;
+
         const {status: lessonExists, content: lesson } = await lessonService.findById(id);
+
+        let started = false;
+
+        if (user.lessonsTaken && user.lessonsTaken.includes(lessonId)) {
+            started = true;
+        }
 
         if (!lessonExists) return res.status(404).json({ error: "Lesson not found" });
 
-        return res.status(200).json(lesson);
+        return res.status(200).json({lesson, started});
     } catch (error) {
         next(error);
     }
