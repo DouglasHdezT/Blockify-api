@@ -60,7 +60,7 @@ controller.findTakenLesson = async (req, res, next) => {
         const { _id: userID } = req.user;
         const lessons = await userService.getTakenLessons(userID);
 
-        return res.status(201).json(lessons);
+        return res.status(201).json(lessons.content);
 
     } catch (error) {
         next(error);
