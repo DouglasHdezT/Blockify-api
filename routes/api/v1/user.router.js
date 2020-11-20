@@ -13,6 +13,8 @@ const {
 } = require("@internal/validators-v1/user.validator");
 const { runValidation } = require("@internal/validators-v1");
 
+router.get('/findTakenLesson', userController.findTakenLesson);
+
 //Update
 router.put('/', userController.update);
 router.put('/addTakenLesson', addTakenLesson, runValidation, userController.addTakenLesson);

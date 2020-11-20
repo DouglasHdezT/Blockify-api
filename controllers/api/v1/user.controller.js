@@ -44,9 +44,23 @@ controller.addTakenLesson = async (req, res, next) => {
 
             if (!added) return res.status(409).json({ error: "No se pudo agregar" });
             return res.status(201).json({ message: "Added!" });
-        } else { 
+        } else {
             return res.status(200).json({ message: "Already in array" });
         }
+
+    } catch (error) {
+        next(error);
+    }
+
+
+}
+
+controller.findTakenLesson = async (req, res, next) => {
+    try {
+        const { _id: userID } = req.user;
+        const lessons = await userService.getTakenLessons(userID);
+
+        return res.status(201).json(lessons);
 
     } catch (error) {
         next(error);
