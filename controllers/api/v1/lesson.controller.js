@@ -37,8 +37,9 @@ controller.findById = async (req, res, next) => {
         const {status: lessonExists, content: lesson } = await lessonService.findById(id);
 
         let started = false;
+        const alreadyInArray = user.lessonsTaken.some(lessonA => lessonA.equals(lesson._id))
 
-        if (user.lessonsTaken && user.lessonsTaken.includes(lesson._id)) {
+        if (user.lessonsTaken && alreadyInArray) {
             started = true;
         }
 

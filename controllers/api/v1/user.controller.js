@@ -36,8 +36,9 @@ controller.addTakenLesson = async (req, res, next) => {
         if (!exist) { return res.status(409).json({ error: "No existe la leccion" }) }
 
         const user = req.user;
+        const alreadyInArray = user.lessonsTaken.some(lessonA => lessonA.equals(lessonId))
 
-        if (!user.lessonsTaken || !user.lessonsTaken.includes(lessonId)) {
+        if (!user.lessonsTaken || !alreadyInArray) {
 
             const { status: added } = await userService.addTakenLesson(req.user._id, lessonId);
 
